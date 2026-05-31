@@ -3,345 +3,324 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Matt — Recovery Dashboard</title>
+<title>Matt — 14-Day Oura Summary</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0d0d0f;
-    --panel:#16161a;
-    --panel2:#1d1d22;
-    --line:#2a2a30;
-    --orange:#fc4c02;
-    --orange-dim:#c43c05;
-    --text:#f4f4f5;
-    --muted:#8a8a93;
-    --green:#4caf6d;
-    --amber:#e0a73a;
-    --red:#e0563a;
+    --bg:#0a0e14;--bg2:#0e131c;--panel:#111824;--panel2:#16202e;
+    --line:#1f2c3e;--line2:#2a3a52;
+    --cyan:#22d3ee;--magenta:#f637ec;--lime:#a3e635;--amber:#fbbf24;--red:#fb5a5a;
+    --text:#e8f0fa;--muted:#7d8ba3;--muted2:#56657f;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Barlow',system-ui,sans-serif;
-    font-weight:300;
-    line-height:1.5;
-    padding:24px 16px 60px;
-    -webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(34,211,238,.06), transparent 60%),
+      radial-gradient(900px 500px at -10% 10%, rgba(246,55,236,.05), transparent 55%),
+      var(--bg);
+    color:var(--text);font-family:'Rajdhani',system-ui,sans-serif;font-weight:500;
+    line-height:1.5;padding:26px 16px 70px;-webkit-font-smoothing:antialiased;letter-spacing:.2px;
   }
-  .wrap{max-width:880px;margin:0 auto;}
-  header{
-    display:flex;align-items:baseline;justify-content:space-between;
-    border-bottom:2px solid var(--orange);
-    padding-bottom:10px;margin-bottom:8px;flex-wrap:wrap;gap:6px;
-  }
-  h1{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:1px;font-weight:400;line-height:1;}
-  h1 span{color:var(--orange);}
-  .pulled{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:1px;}
-  .subtitle{color:var(--muted);font-size:13px;margin-bottom:24px;letter-spacing:.3px;}
-  .grid{display:grid;gap:14px;}
-  .row{display:grid;gap:14px;grid-template-columns:1fr;}
-  @media(min-width:680px){
-    .row.two{grid-template-columns:300px 1fr;}
-    .row.three{grid-template-columns:1fr 1fr 1fr;}
-  }
-  .panel{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:10px;
-    padding:18px 20px;
-  }
-  .panel h2{
-    font-family:'Bebas Neue',sans-serif;font-weight:400;
-    font-size:18px;letter-spacing:1.5px;color:var(--muted);
-    text-transform:uppercase;margin-bottom:14px;
-  }
-  /* readiness hero */
-  .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
-  .ring-wrap{position:relative;width:180px;height:180px;}
-  .ring-wrap svg{transform:rotate(-90deg);}
-  .ring-val{
-    position:absolute;inset:0;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;
-  }
-  .ring-num{font-family:'Bebas Neue',sans-serif;font-size:64px;line-height:.85;}
-  .ring-label{font-size:12px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-top:4px;}
-  .ring-status{font-size:13px;letter-spacing:1px;margin-top:10px;font-weight:500;}
-  /* stat tiles */
-  .tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-  .tile{background:var(--panel2);border-radius:8px;padding:12px 14px;}
-  .tile .k{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
-  .tile .v{font-family:'Bebas Neue',sans-serif;font-size:30px;line-height:1;margin-top:2px;}
-  .tile .v small{font-family:'Barlow';font-size:13px;color:var(--muted);font-weight:400;letter-spacing:0;}
-  .tile .d{font-size:11px;margin-top:3px;letter-spacing:.3px;}
-  .good{color:var(--green);}.warn{color:var(--amber);}.bad{color:var(--red);}
-  /* sparkline */
-  .spark-row{display:flex;align-items:center;gap:14px;margin-bottom:12px;}
+  .wrap{max-width:900px;margin:0 auto;}
+  header{border-bottom:1px solid var(--line2);padding-bottom:16px;margin-bottom:8px;position:relative;}
+  header::after{content:"";position:absolute;bottom:-1px;left:0;width:120px;height:2px;background:linear-gradient(90deg,var(--cyan),transparent);box-shadow:0 0 12px var(--cyan);}
+  .titlerow{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  h1{font-family:'Orbitron',sans-serif;font-size:30px;letter-spacing:3px;font-weight:900;line-height:1;text-transform:uppercase;}
+  h1 .accent{color:var(--cyan);text-shadow:0 0 18px rgba(34,211,238,.55);}
+  .pulled{font-size:13px;letter-spacing:1px;background:var(--panel2);padding:7px 14px;border-radius:6px;border:1px solid var(--line2);font-weight:600;text-transform:uppercase;}
+  .pulled b{color:var(--cyan);font-weight:700;}
+  .subtitle{color:var(--muted);font-size:14px;margin:10px 0 24px;letter-spacing:1px;text-transform:uppercase;font-weight:600;}
+  .grid{display:grid;gap:16px;}
+  .row{display:grid;gap:16px;grid-template-columns:1fr;}
+  @media(min-width:700px){.row.two{grid-template-columns:300px 1fr;}.row.half{grid-template-columns:1fr 1fr;}}
+  .panel{background:linear-gradient(160deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:12px;padding:20px 22px;position:relative;}
+  .panel h2{font-family:'Orbitron',sans-serif;font-weight:700;font-size:14px;letter-spacing:2.5px;color:var(--cyan);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:9px;}
+  .panel h2::before{content:"";width:7px;height:7px;background:var(--cyan);box-shadow:0 0 8px var(--cyan);border-radius:1px;}
+  .hero{display:flex;flex-direction:column;align-items:center;}
+  .ring-wrap{position:relative;width:184px;height:184px;}
+  .ring-wrap svg{transform:rotate(-90deg);filter:drop-shadow(0 0 6px rgba(34,211,238,.4));}
+  .ring-val{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .ring-num{font-family:'Orbitron',sans-serif;font-size:58px;font-weight:900;line-height:.85;}
+  .ring-label{font-size:13px;text-transform:uppercase;letter-spacing:3px;color:var(--muted);margin-top:6px;font-weight:600;}
+  .ring-status{font-family:'Orbitron',sans-serif;font-size:14px;letter-spacing:2px;margin-top:14px;font-weight:700;text-transform:uppercase;}
+  .tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .tile{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:14px 16px;}
+  .tile .k{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:600;}
+  .tile .v{font-family:'Orbitron',sans-serif;font-size:30px;font-weight:700;line-height:1;margin-top:6px;}
+  .tile .v small{font-family:'Rajdhani';font-size:14px;color:var(--muted);font-weight:600;letter-spacing:0;}
+  .tile .avg{font-size:12px;color:var(--muted2);margin-top:5px;letter-spacing:.5px;font-weight:600;}
+  .tile .d{font-size:12px;margin-top:3px;letter-spacing:.5px;font-weight:700;text-transform:uppercase;}
+  .cyan{color:var(--cyan);}.mag{color:var(--magenta);}.lime{color:var(--lime);}
+  .good{color:var(--lime);}.warn{color:var(--amber);}.bad{color:var(--red);}.neutral{color:var(--muted);}
+  .summary{border-color:var(--line2);}
+  .summary .line{font-size:16px;margin-bottom:10px;line-height:1.6;font-weight:500;}
+  .summary .line b{color:var(--text);font-weight:700;}
+  .resil-badge{display:inline-block;font-family:'Orbitron',sans-serif;font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:6px;border:1px solid currentColor;margin-bottom:14px;}
+  .flags{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);}
+  .flags .fhead{font-size:12px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:9px;font-weight:700;}
+  .flagitem{font-size:14px;margin-bottom:8px;display:flex;gap:10px;align-items:flex-start;font-weight:500;}
+  .flagitem .dot{flex-shrink:0;margin-top:7px;width:7px;height:7px;border-radius:50%;}
+  .dot.amber{background:var(--amber);box-shadow:0 0 7px var(--amber);}
+  .dot.red{background:var(--red);box-shadow:0 0 7px var(--red);}
+  .dot.lime{background:var(--lime);box-shadow:0 0 7px var(--lime);}
+  .spark-row{display:flex;align-items:center;gap:16px;margin-bottom:18px;}
   .spark-row:last-child{margin-bottom:0;}
-  .spark-lab{width:46px;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
-  .spark-cur{font-family:'Bebas Neue',sans-serif;font-size:24px;width:54px;text-align:right;}
-  .spark-cur small{font-family:'Barlow';font-size:11px;color:var(--muted);font-weight:400;}
-  .spark svg{display:block;}
-  /* trend table */
-  table{width:100%;border-collapse:collapse;font-size:13px;}
-  th,td{text-align:right;padding:6px 8px;border-bottom:1px solid var(--line);}
+  .spark-lab{width:58px;font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:700;}
+  .spark-cur{font-family:'Orbitron',sans-serif;font-size:22px;font-weight:700;width:62px;text-align:right;}
+  .spark-cur small{font-family:'Rajdhani';font-size:12px;color:var(--muted);font-weight:600;}
+  .spark{flex:1;}.spark svg{display:block;width:100%;}
+  .stressbar{height:26px;border-radius:7px;overflow:hidden;display:flex;border:1px solid var(--line2);margin:4px 0 10px;}
+  .stressbar .seg{height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;letter-spacing:.5px;}
+  .stressbar .restored{background:linear-gradient(90deg,rgba(163,230,53,.35),rgba(163,230,53,.2));color:var(--lime);}
+  .stressbar .stressed{background:linear-gradient(90deg,rgba(251,90,90,.3),rgba(251,90,90,.18));color:var(--red);}
+  .stresslegend{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-weight:600;}
+  .metric-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .metric-pair .m{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:14px 16px;text-align:center;}
+  .metric-pair .m .mv{font-family:'Orbitron',sans-serif;font-size:34px;font-weight:900;line-height:1;}
+  .metric-pair .m .ml{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-top:6px;font-weight:600;}
+  .metric-pair .m .ms{font-size:12px;color:var(--muted2);margin-top:3px;font-weight:600;}
+  table{width:100%;border-collapse:collapse;font-size:14px;font-weight:600;}
+  th,td{text-align:right;padding:9px 8px;border-bottom:1px solid var(--line);}
   th:first-child,td:first-child{text-align:left;}
-  th{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:500;}
-  tr.flagged td{background:rgba(224,167,58,.06);}
-  .flagdot{color:var(--amber);font-size:11px;}
-  /* subjective / context */
-  .field{margin-bottom:12px;}
-  .field:last-child{margin-bottom:0;}
-  .field .lab{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:3px;}
-  .field .val{font-size:15px;}
-  .pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;letter-spacing:.5px;font-weight:500;}
-  .pill.good{background:rgba(76,175,109,.15);color:var(--green);}
-  .pill.warn{background:rgba(224,167,58,.15);color:var(--amber);}
-  .shift-banner{
-    border-left:3px solid var(--orange);background:var(--panel2);
-    padding:10px 14px;border-radius:6px;font-size:13px;color:var(--muted);
-  }
+  th{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:700;}
+  tr.flagged td{background:rgba(251,191,36,.06);}
+  .flagdot{color:var(--amber);}
+  .field{margin-bottom:16px;}.field:last-child{margin-bottom:0;}
+  .field .lab{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:5px;font-weight:700;}
+  .field .val{font-size:16px;font-weight:500;}
+  .pill{display:inline-block;padding:5px 14px;border-radius:6px;font-family:'Orbitron',sans-serif;font-size:13px;letter-spacing:1.5px;font-weight:700;text-transform:uppercase;border:1px solid currentColor;}
+  .ctx{font-size:13px;color:var(--muted);margin-top:6px;font-weight:600;}
+  .shift-banner{border-left:3px solid var(--cyan);background:var(--panel2);padding:12px 16px;border-radius:7px;font-size:14px;color:var(--muted);font-weight:500;}
   .shift-banner.active{border-color:var(--amber);color:var(--text);}
-  .shift-banner b{color:var(--text);font-weight:500;}
-  footer{margin-top:24px;text-align:center;color:var(--muted);font-size:11px;letter-spacing:.5px;}
-  .err{color:var(--amber);font-size:12px;text-align:center;margin-bottom:14px;display:none;}
+  .shift-banner b{color:var(--text);font-weight:700;}
+  .caveat{font-size:12px;color:var(--muted2);margin-top:14px;padding-top:12px;border-top:1px solid var(--line);line-height:1.55;font-weight:600;}
+  footer{margin-top:28px;text-align:center;color:var(--muted2);font-size:12px;letter-spacing:1px;text-transform:uppercase;font-weight:600;}
+  .err{color:var(--amber);font-size:13px;text-align:center;margin-bottom:14px;display:none;font-weight:600;}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>RECOVERY <span>READINESS</span></h1>
-    <div class="pulled" id="pulled">—</div>
+    <div class="titlerow">
+      <h1 id="title">14&middot;DAY <span class="accent">OURA</span> SUMMARY</h1>
+      <div class="pulled" id="pulled">—</div>
+    </div>
   </header>
-  <div class="subtitle" id="subtitle">Oura recovery overview · for coaching review</div>
+  <div class="subtitle" id="subtitle">Recovery overview · coaching review</div>
   <div class="err" id="err"></div>
-
   <div class="grid">
-    <!-- top row: readiness ring + key stats -->
+    <div class="panel summary">
+      <h2>Outlook — Week Ahead</h2>
+      <div id="resilBadge"></div>
+      <div id="summaryBody"></div>
+      <div class="flags" id="flagsBlock" style="display:none;">
+        <div class="fhead">For Hannah's Attention</div>
+        <div id="flagsList"></div>
+      </div>
+    </div>
     <div class="row two">
       <div class="panel hero">
         <h2 style="align-self:flex-start;">Readiness</h2>
         <div class="ring-wrap">
-          <svg width="180" height="180" viewBox="0 0 180 180">
-            <circle cx="90" cy="90" r="78" fill="none" stroke="#2a2a30" stroke-width="14"/>
-            <circle id="ring" cx="90" cy="90" r="78" fill="none" stroke="var(--orange)" stroke-width="14" stroke-linecap="round" stroke-dasharray="490" stroke-dashoffset="490"/>
+          <svg width="184" height="184" viewBox="0 0 184 184">
+            <circle cx="92" cy="92" r="79" fill="none" stroke="#1f2c3e" stroke-width="13"/>
+            <circle id="ring" cx="92" cy="92" r="79" fill="none" stroke="var(--cyan)" stroke-width="13" stroke-linecap="round" stroke-dasharray="496" stroke-dashoffset="496"/>
           </svg>
-          <div class="ring-val">
-            <div class="ring-num" id="readyNum">—</div>
-            <div class="ring-label">/ 100</div>
-          </div>
+          <div class="ring-val"><div class="ring-num" id="readyNum">—</div><div class="ring-label">/ 100</div></div>
         </div>
         <div class="ring-status" id="readyStatus">—</div>
       </div>
-
       <div class="panel">
-        <h2>Today's Markers</h2>
+        <h2>Today vs 14-Day Average</h2>
         <div class="tiles">
-          <div class="tile">
-            <div class="k">Resting HR</div>
-            <div class="v" id="rhrV">—<small> bpm</small></div>
-            <div class="d" id="rhrD">—</div>
-          </div>
-          <div class="tile">
-            <div class="k">HRV</div>
-            <div class="v" id="hrvV">—<small> ms</small></div>
-            <div class="d" id="hrvD">—</div>
-          </div>
-          <div class="tile">
-            <div class="k">Sleep</div>
-            <div class="v" id="sleepV">—</div>
-            <div class="d" id="sleepD">—</div>
-          </div>
-          <div class="tile">
-            <div class="k">Temp Dev</div>
-            <div class="v" id="tempV">—<small> °F</small></div>
-            <div class="d" id="tempD">—</div>
-          </div>
+          <div class="tile"><div class="k">Resting HR</div><div class="v cyan" id="rhrV">—<small> bpm</small></div><div class="avg" id="rhrAvg">—</div><div class="d" id="rhrD">—</div></div>
+          <div class="tile"><div class="k">HRV</div><div class="v mag" id="hrvV">—<small> ms</small></div><div class="avg" id="hrvAvg">—</div><div class="d" id="hrvD">—</div></div>
+          <div class="tile"><div class="k">Sleep</div><div class="v lime" id="sleepV">—</div><div class="avg" id="sleepSub">—</div></div>
+          <div class="tile"><div class="k">Temp Dev</div><div class="v" id="tempV">—<small> °F</small></div><div class="d" id="tempD">—</div></div>
         </div>
       </div>
     </div>
-
-    <!-- trends sparklines -->
-    <div class="panel">
-      <h2>14-Day Trends</h2>
-      <div class="spark-row">
-        <div class="spark-lab">HRV</div>
-        <div class="spark" id="sparkHRV"></div>
-        <div class="spark-cur" id="hrvCur">—<small>ms</small></div>
+    <div class="row half">
+      <div class="panel">
+        <h2>Daily Stress</h2>
+        <div class="stressbar" id="stressBar"></div>
+        <div class="stresslegend"><span id="restoredLeg">—</span><span id="stressedLeg">—</span></div>
+        <div class="ctx" id="stressSummary" style="margin-top:10px;">—</div>
       </div>
-      <div class="spark-row">
-        <div class="spark-lab">RHR</div>
-        <div class="spark" id="sparkRHR"></div>
-        <div class="spark-cur" id="rhrCur">—<small>bpm</small></div>
-      </div>
-      <div class="spark-row">
-        <div class="spark-lab">Ready</div>
-        <div class="spark" id="sparkRDY"></div>
-        <div class="spark-cur" id="rdyCur">—</div>
+      <div class="panel">
+        <h2>Fitness Markers</h2>
+        <div class="metric-pair">
+          <div class="m"><div class="mv cyan" id="vo2V">—</div><div class="ml">VO₂ Max</div><div class="ms">Oura estimate</div></div>
+          <div class="m"><div class="mv lime" id="cardioV">—</div><div class="ml">Cardio Age</div><div class="ms" id="cardioSub">—</div></div>
+        </div>
       </div>
     </div>
-
-    <!-- subjective + shift context -->
+    <div class="panel">
+      <h2>14-Day Trends</h2>
+      <div class="spark-row"><div class="spark-lab">HRV</div><div class="spark" id="sparkHRV"></div><div class="spark-cur mag" id="hrvCur">—<small>ms</small></div></div>
+      <div class="spark-row"><div class="spark-lab">RHR</div><div class="spark" id="sparkRHR"></div><div class="spark-cur cyan" id="rhrCur">—<small>bpm</small></div></div>
+      <div class="spark-row"><div class="spark-lab">Ready</div><div class="spark" id="sparkRDY"></div><div class="spark-cur lime" id="rdyCur">—</div></div>
+      <div class="spark-row"><div class="spark-lab">Stress</div><div class="spark" id="sparkSTR"></div><div class="spark-cur warn" id="strCur">—<small>m</small></div></div>
+    </div>
+    <div class="panel">
+      <h2>Training Load — Strava</h2>
+      <div class="row two">
+        <div>
+          <div style="display:flex;align-items:flex-end;gap:20px;margin:6px 0 10px;">
+            <div style="flex:1;text-align:center;">
+              <div style="background:var(--panel2);border:1px solid var(--line);border-radius:7px 7px 0 0;position:relative;height:96px;display:flex;align-items:flex-end;overflow:hidden;"><div id="acuteFill" style="width:100%;background:linear-gradient(180deg,var(--cyan),rgba(34,211,238,.4));border-radius:7px 7px 0 0;box-shadow:0 0 14px rgba(34,211,238,.4);"></div></div>
+              <div style="font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-top:8px;font-weight:700;">Acute 7d</div>
+              <div style="font-family:'Orbitron';font-size:20px;font-weight:700;" id="acuteVal">—</div>
+            </div>
+            <div style="flex:1;text-align:center;">
+              <div style="background:var(--panel2);border:1px solid var(--line);border-radius:7px 7px 0 0;position:relative;height:96px;display:flex;align-items:flex-end;overflow:hidden;"><div id="chronicFill" style="width:100%;background:linear-gradient(180deg,var(--magenta),rgba(246,55,236,.4));border-radius:7px 7px 0 0;box-shadow:0 0 14px rgba(246,55,236,.35);"></div></div>
+              <div style="font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-top:8px;font-weight:700;">Chronic 28d/wk</div>
+              <div style="font-family:'Orbitron';font-size:20px;font-weight:700;" id="chronicVal">—</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="text-align:center;padding:14px;border-radius:9px;background:var(--panel2);border:1px solid var(--line);">
+            <div style="font-family:'Orbitron';font-size:36px;font-weight:900;line-height:1;" id="acwrN">—</div>
+            <div style="font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-top:6px;font-weight:700;">Acute : Chronic Ratio</div>
+          </div>
+          <div style="display:flex;gap:20px;margin-top:14px;">
+            <div><div style="color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:1px;font-weight:700;">Sessions 7d</div><div style="font-family:'Orbitron';font-size:24px;font-weight:700;" id="sess7">—</div></div>
+            <div><div style="color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:1px;font-weight:700;">Avg HR 7d</div><div style="font-family:'Orbitron';font-size:24px;font-weight:700;" id="hr7">—</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="caveat" id="loadCaveat">—</div>
+    </div>
     <div class="row two">
       <div class="panel">
         <h2>Athlete Status</h2>
-        <div class="field">
-          <div class="lab">Subjective Readiness</div>
-          <div class="val"><span class="pill good" id="subjReady">—</span></div>
-        </div>
-        <div class="field">
-          <div class="lab">Current Niggle</div>
-          <div class="val" id="niggle">—</div>
-        </div>
-        <div class="field">
-          <div class="lab">Note</div>
-          <div class="val" id="note" style="font-size:13px;color:var(--muted);">—</div>
-        </div>
+        <div class="field"><div class="lab">Subjective Readiness</div><div class="val"><span class="pill" id="subjReady">—</span></div><div class="ctx" id="subjCtx">—</div></div>
+        <div class="field"><div class="lab">Note</div><div class="val" id="note" style="font-size:14px;color:var(--muted);">—</div></div>
       </div>
       <div class="panel">
         <h2>Recovery Context</h2>
-        <div class="shift-banner" id="shiftBanner">
-          <span id="shiftText">—</span>
-        </div>
-        <div class="field" style="margin-top:14px;">
-          <div class="lab">Baselines</div>
-          <div class="val" style="font-size:13px;color:var(--muted);" id="baselines">—</div>
-        </div>
+        <div class="shift-banner" id="shiftBanner"><span id="shiftText">—</span></div>
+        <div class="field" style="margin-top:16px;"><div class="lab">Baselines</div><div class="val" style="font-size:13px;color:var(--muted);line-height:1.7;" id="baselines">—</div></div>
       </div>
     </div>
-
-    <!-- full trend table -->
     <div class="panel">
       <h2>Daily Detail</h2>
       <div style="overflow-x:auto;">
-        <table>
-          <thead>
-            <tr><th>Date</th><th>Ready</th><th>RHR</th><th>HRV</th><th>Temp</th><th></th></tr>
-          </thead>
-          <tbody id="trendBody"></tbody>
-        </table>
+        <table><thead><tr><th>Date</th><th>Ready</th><th>RHR</th><th>HRV</th><th>Stress</th><th>Temp</th><th></th></tr></thead><tbody id="trendBody"></tbody></table>
       </div>
     </div>
   </div>
-
-  <footer id="footer">Oura recovery data · read-only · updated weekly</footer>
+  <footer id="footer">Oura + Strava recovery data · read-only · updated weekly</footer>
 </div>
-
 <script>
-// Embedded fallback so the page still renders if oura_data.json can't be fetched (e.g. opened locally)
-const FALLBACK = {"pulled":"2026-05-31 14:02","athlete":"Matt Harris","baselines":{"rhr":57,"rhr_range":"56-59","hrv":43,"temp_flag_threshold":0.5},"latest":{"date":"2026-05-31","readiness":86,"readiness_label":"Optimal","contributors":{},"sleep":{"total":"8h39m","total_minutes":519,"deep_minutes":93,"rem_minutes":128,"light_minutes":297,"awake_minutes":108},"rhr":50,"hrv":44,"temp_dev":-0.1,"resp_rate":14.2},"trend":[{"date":"2026-05-18","readiness":86,"rhr":51,"hrv":41,"temp_dev":0.0,"flag":false},{"date":"2026-05-19","readiness":68,"rhr":51,"hrv":39,"temp_dev":0.2,"flag":true},{"date":"2026-05-20","readiness":94,"rhr":49,"hrv":44,"temp_dev":0.3,"flag":false},{"date":"2026-05-21","readiness":71,"rhr":53,"hrv":29,"temp_dev":-0.3,"flag":true},{"date":"2026-05-22","readiness":72,"rhr":55,"hrv":23,"temp_dev":0.0,"flag":true},{"date":"2026-05-23","readiness":71,"rhr":50,"hrv":38,"temp_dev":0.0,"flag":true},{"date":"2026-05-24","readiness":78,"rhr":50,"hrv":44,"temp_dev":0.1,"flag":false},{"date":"2026-05-25","readiness":76,"rhr":50,"hrv":50,"temp_dev":0.1,"flag":false},{"date":"2026-05-26","readiness":80,"rhr":50,"hrv":44,"temp_dev":-0.1,"flag":false},{"date":"2026-05-27","readiness":87,"rhr":46,"hrv":64,"temp_dev":0.1,"flag":false},{"date":"2026-05-28","readiness":83,"rhr":51,"hrv":42,"temp_dev":0.2,"flag":false},{"date":"2026-05-29","readiness":76,"rhr":50,"hrv":38,"temp_dev":0.1,"flag":true},{"date":"2026-05-30","readiness":80,"rhr":52,"hrv":44,"temp_dev":0.2,"flag":false},{"date":"2026-05-31","readiness":86,"rhr":50,"hrv":44,"temp_dev":-0.1,"flag":false}],"activity":{"date":"2026-05-30","score":100,"steps":11805,"active_cal":601,"total_cal":2616},"subjective":{"readiness":"Good","niggle":"Soleus quiet · hamstring DOMS post-strength","note":"Strength Fri night, lever intervals Sat PM. Hams only tight group."},"context":{"nightshift_active":false,"nightshift_note":"On-call cycle every 6 weeks (Fri 01:30–Sun 01:30). Expect HRV dip + RHR rise 2–3 days post-shift — not overtraining."}};
-
-function spark(el, vals, color, {invert=false, baseline=null}={}){
-  const w=180,h=34,pad=4;
-  const min=Math.min(...vals), max=Math.max(...vals);
-  const range=(max-min)||1;
-  const x=i=>pad+(i*(w-2*pad)/(vals.length-1));
-  const y=v=>h-pad-((v-min)/range)*(h-2*pad);
-  let pts=vals.map((v,i)=>`${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
-  let base='';
-  if(baseline!=null && baseline>=min && baseline<=max){
-    const by=y(baseline).toFixed(1);
-    base=`<line x1="${pad}" y1="${by}" x2="${w-pad}" y2="${by}" stroke="#8a8a93" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>`;
-  }
-  const last=vals[vals.length-1];
-  const lx=x(vals.length-1).toFixed(1), ly=y(last).toFixed(1);
-  el.innerHTML=`<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
-    ${base}
-    <polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-    <circle cx="${lx}" cy="${ly}" r="3" fill="${color}"/>
-  </svg>`;
+const FALLBACK = {"pulled": "2026-05-31 14:02", "athlete": "Matt Harris", "baselines": {"rhr": 57, "rhr_range": "56-59", "hrv": 43, "temp_flag_threshold": 0.5, "avg_rhr_14d": 50.6, "avg_hrv_14d": 41.7}, "latest": {"date": "2026-05-31", "readiness": 86, "readiness_label": "Optimal", "contributors": {"hrv_balance": 88, "resting_hr": 96, "recovery_index": 67, "body_temp": 100, "sleep_balance": 84, "previous_day_activity": 100, "previous_night": 98}, "sleep": {"total": "8h39m", "total_minutes": 519, "deep_minutes": 93, "rem_minutes": 128, "light_minutes": 297, "awake_minutes": 108, "bedtime": "00:36", "wake": "11:04"}, "rhr": 50, "hrv": 44, "temp_dev": -0.1, "resp_rate": 14.2, "stress": {"stress_high_minutes": 142, "recovery_high_minutes": 318, "day_summary": "balanced"}, "resilience": {"level": "solid", "contributors": {"sleep_recovery": 78, "daytime_recovery": 71, "stress": 64}}, "vo2max": 52.4, "cardio_age": 38}, "trend": [{"date": "2026-05-18", "readiness": 86, "rhr": 51, "hrv": 41, "temp_dev": 0.0, "flag": false, "stress_min": 120, "resilience": "solid"}, {"date": "2026-05-19", "readiness": 68, "rhr": 51, "hrv": 39, "temp_dev": 0.2, "flag": true, "stress_min": 165, "resilience": "adequate"}, {"date": "2026-05-20", "readiness": 94, "rhr": 49, "hrv": 44, "temp_dev": 0.3, "flag": false, "stress_min": 98, "resilience": "strong"}, {"date": "2026-05-21", "readiness": 71, "rhr": 53, "hrv": 29, "temp_dev": -0.3, "flag": true, "stress_min": 180, "resilience": "adequate"}, {"date": "2026-05-22", "readiness": 72, "rhr": 55, "hrv": 23, "temp_dev": 0.0, "flag": true, "stress_min": 210, "resilience": "limited"}, {"date": "2026-05-23", "readiness": 71, "rhr": 50, "hrv": 38, "temp_dev": 0.0, "flag": true, "stress_min": 175, "resilience": "adequate"}, {"date": "2026-05-24", "readiness": 78, "rhr": 50, "hrv": 44, "temp_dev": 0.1, "flag": false, "stress_min": 130, "resilience": "solid"}, {"date": "2026-05-25", "readiness": 76, "rhr": 50, "hrv": 50, "temp_dev": 0.1, "flag": false, "stress_min": 110, "resilience": "solid"}, {"date": "2026-05-26", "readiness": 80, "rhr": 50, "hrv": 44, "temp_dev": -0.1, "flag": false, "stress_min": 125, "resilience": "strong"}, {"date": "2026-05-27", "readiness": 87, "rhr": 46, "hrv": 64, "temp_dev": 0.1, "flag": false, "stress_min": 90, "resilience": "strong"}, {"date": "2026-05-28", "readiness": 83, "rhr": 51, "hrv": 42, "temp_dev": 0.2, "flag": false, "stress_min": 140, "resilience": "solid"}, {"date": "2026-05-29", "readiness": 76, "rhr": 50, "hrv": 38, "temp_dev": 0.1, "flag": true, "stress_min": 160, "resilience": "solid"}, {"date": "2026-05-30", "readiness": 80, "rhr": 52, "hrv": 44, "temp_dev": 0.2, "flag": false, "stress_min": 150, "resilience": "adequate"}, {"date": "2026-05-31", "readiness": 86, "rhr": 50, "hrv": 44, "temp_dev": -0.1, "flag": false, "stress_min": 142, "resilience": "solid"}], "activity": {"date": "2026-05-30", "score": 100, "steps": 11805, "active_cal": 601, "total_cal": 2616}, "subjective": {"readiness": "Good", "note": "Strength Fri night, lever intervals Sat PM. Hams only tight group."}, "context": {"nightshift_active": false, "nightshift_note": "On-call cycle every 6 weeks (Fri 01:30–Sun 01:30). Expect HRV dip + RHR rise 2–3 days post-shift — not overtraining."}, "strava": {"pulled": "2026-05-31 14:02", "acute_7d_mins": 312, "chronic_28d_weekly_mins": 286, "acwr": 1.09, "sessions_7d": 5, "avg_hr_7d": 138, "note": "Duration + HR based. Treadmill lever sessions: pace/power/TSS invalid (85% BW). Outdoor rides: power estimated, unreliable. Load = duration, not TSS."}};
+const RESIL_COLORS={limited:'var(--red)',adequate:'var(--amber)',solid:'var(--cyan)',strong:'var(--lime)',exceptional:'var(--lime)'};
+function fmtPullTime(s){try{const [d,t]=s.split(' ');const [y,m,day]=d.split('-');const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return `${day} ${months[+m-1]} ${y} · ${t}`;}catch(e){return s;}}
+function spark(el,vals,color,{baseline=null}={}){
+  const w=260,h=36,pad=4;const all=baseline!=null?[...vals,baseline]:vals;
+  const min=Math.min(...all),max=Math.max(...all),range=(max-min)||1;
+  const x=i=>pad+(i*(w-2*pad)/(vals.length-1)),y=v=>h-pad-((v-min)/range)*(h-2*pad);
+  const pts=vals.map((v,i)=>`${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
+  let base='';if(baseline!=null){const by=y(baseline).toFixed(1);base=`<line x1="${pad}" y1="${by}" x2="${w-pad}" y2="${by}" stroke="#56657f" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>`;}
+  const lx=x(vals.length-1).toFixed(1),ly=y(vals.at(-1)).toFixed(1);
+  el.innerHTML=`<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">${base}<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" style="filter:drop-shadow(0 0 4px ${color})"/><circle cx="${lx}" cy="${ly}" r="3.2" fill="${color}"/></svg>`;
 }
-
+function linregSlope(vals){const n=vals.length,xs=[...Array(n).keys()];const mx=xs.reduce((a,b)=>a+b,0)/n,my=vals.reduce((a,b)=>a+b,0)/n;let num=0,den=0;for(let i=0;i<n;i++){num+=(xs[i]-mx)*(vals[i]-my);den+=(xs[i]-mx)**2;}return den?num/den:0;}
+function buildSummary(d){
+  const t=d.trend;const hrv=t.map(x=>x.hrv),rhr=t.map(x=>x.rhr),rdy=t.map(x=>x.readiness);
+  const mean=a=>a.reduce((x,y)=>x+y,0)/a.length;const last7=a=>a.slice(-7),prev7=a=>a.slice(-14,-7);
+  const hrvL7=mean(last7(hrv)),hrvP7=mean(prev7(hrv)),rdyL7=mean(last7(rdy)),rhrSlope=linregSlope(rhr);
+  const resil=d.latest.resilience.level;const lines=[],flags=[];
+  const col=RESIL_COLORS[resil]||'var(--cyan)';
+  document.getElementById('resilBadge').innerHTML=`<span class="resil-badge" style="color:${col}">Resilience: ${resil}</span>`;
+  lines.push(`<div class="line"><b>Oura resilience rated "${resil}".</b> 7-day readiness averaging ${rdyL7.toFixed(0)}/100, latest ${d.latest.readiness}. HRV ${hrvL7>=hrvP7?'holding/rising':'easing'} (${hrvL7.toFixed(0)}ms recent vs ${hrvP7.toFixed(0)}ms prior week), RHR ${rhrSlope<0?'trending down (good)':rhrSlope>0.15?'creeping up':'flat'}.</div>`);
+  const acwr=d.strava.acwr;let loadMsg;
+  if(acwr>1.5)loadMsg=`Training load spiking (ACWR ${acwr}) — acute well above chronic.`;
+  else if(acwr<0.8)loadMsg=`Training load dropping (ACWR ${acwr}) — taper/detraining zone.`;
+  else loadMsg=`Training load balanced (ACWR ${acwr}, sweet spot ~0.8–1.3).`;
+  lines.push(`<div class="line">${loadMsg} Recovery vs load ${(acwr>=0.8&&acwr<=1.3&&rdyL7>=75)?'well-matched':'worth watching together'}.</div>`);
+  if(['limited','adequate'].includes(resil))flags.push(['amber',`Resilience only "${resil}" — capacity for hard load is reduced this week.`]);
+  if(hrvL7<hrvP7*0.9)flags.push(['amber',`HRV down ~${Math.round((1-hrvL7/hrvP7)*100)}% week-on-week — monitor before key sessions.`]);
+  if(rhrSlope>0.2)flags.push(['amber','Resting HR drifting up across the fortnight — early fatigue/stress signal.']);
+  if(acwr>1.5)flags.push(['red',`Load spike (ACWR ${acwr}) — raised tissue-stress risk given MTSS history.`]);
+  if(d.context.nightshift_active)flags.push(['amber','Night-shift window active — expect HRV dip / RHR rise 2–3 days, not overtraining.']);
+  const lowTemp=t.slice(-3).some(x=>Math.abs(x.temp_dev)>=d.baselines.temp_flag_threshold);
+  if(lowTemp)flags.push(['red','Temp deviation flagged in last 3 days — possible illness/stress.']);
+  const recentStress=mean(last7(t.map(x=>x.stress_min)));
+  if(recentStress>170)flags.push(['amber',`Daytime stress elevated (avg ${recentStress.toFixed(0)}min/day last week) — WFH/on-call load worth noting.`]);
+  if(flags.length===0)flags.push(['lime','No outstanding flags — green light for planned load.']);
+  document.getElementById('summaryBody').innerHTML=lines.join('');
+  document.getElementById('flagsBlock').style.display='block';
+  document.getElementById('flagsList').innerHTML=flags.map(f=>`<div class="flagitem"><span class="dot ${f[0]}"></span><span>${f[1]}</span></div>`).join('');
+}
 function render(d){
-  // pulled / subtitle
-  document.getElementById('pulled').textContent='Pulled '+d.pulled;
-  document.getElementById('subtitle').textContent=d.athlete+' · Oura recovery overview · for coaching review';
-
-  // readiness ring
-  const r=d.latest.readiness;
-  document.getElementById('readyNum').textContent=r;
+  document.getElementById('pulled').innerHTML='Pulled <b>'+fmtPullTime(d.pulled)+'</b>';
+  document.getElementById('subtitle').textContent=d.athlete+' · 14-day recovery overview · coaching review';
+  const r=d.latest.readiness;document.getElementById('readyNum').textContent=r;
   const status=d.latest.readiness_label||(r>=85?'Optimal':r>=70?'Good':'Pay attention');
-  const sEl=document.getElementById('readyStatus');
-  sEl.textContent=status.toUpperCase();
-  sEl.className='ring-status '+(r>=85?'good':r>=70?'warn':'bad');
-  const circ=490, off=circ-(r/100)*circ;
-  setTimeout(()=>{document.getElementById('ring').style.transition='stroke-dashoffset 1.1s ease';document.getElementById('ring').style.strokeDashoffset=off;},80);
-
-  // tiles
-  const rhr=d.latest.rhr, hrv=d.latest.hrv, bRhr=d.baselines.rhr, bHrv=d.baselines.hrv;
-  document.getElementById('rhrV').innerHTML=rhr+'<small> bpm</small>';
-  const rhrD=document.getElementById('rhrD');
-  rhrD.textContent=(rhr<bRhr?'▼ below baseline':rhr>bRhr?'▲ above baseline':'at baseline')+' ('+bRhr+')';
-  rhrD.className='d '+(rhr<=bRhr?'good':'warn');
-
-  document.getElementById('hrvV').innerHTML=hrv+'<small> ms</small>';
-  const hrvD=document.getElementById('hrvD');
-  hrvD.textContent=(hrv>=bHrv?'▲ at/above baseline':'▼ below baseline')+' ('+bHrv+')';
-  hrvD.className='d '+(hrv>=bHrv?'good':'warn');
-
-  document.getElementById('sleepV').innerHTML=d.latest.sleep.total;
-  document.getElementById('sleepD').textContent='Deep '+Math.round(d.latest.sleep.deep_minutes/60*10)/10+'h · REM '+Math.round(d.latest.sleep.rem_minutes/60*10)/10+'h';
-  document.getElementById('sleepD').className='d';
-
-  const td=d.latest.temp_dev;
-  document.getElementById('tempV').innerHTML=(td>0?'+':'')+td+'<small> °F</small>';
-  const tD=document.getElementById('tempD');
-  const flagged=Math.abs(td)>=d.baselines.temp_flag_threshold;
-  tD.textContent=flagged?'⚠ deviation flag':'within range';
-  tD.className='d '+(flagged?'bad':'good');
-
-  // sparklines
-  const hrvVals=d.trend.map(t=>t.hrv);
-  const rhrVals=d.trend.map(t=>t.rhr);
-  const rdyVals=d.trend.map(t=>t.readiness);
-  spark(document.getElementById('sparkHRV'),hrvVals,'#fc4c02',{baseline:bHrv});
-  spark(document.getElementById('sparkRHR'),rhrVals,'#4caf6d',{baseline:bRhr});
-  spark(document.getElementById('sparkRDY'),rdyVals,'#e0a73a');
-  document.getElementById('hrvCur').innerHTML=hrvVals[hrvVals.length-1]+'<small>ms</small>';
-  document.getElementById('rhrCur').innerHTML=rhrVals[rhrVals.length-1]+'<small>bpm</small>';
-  document.getElementById('rdyCur').textContent=rdyVals[rdyVals.length-1];
-
-  // subjective
-  const subj=document.getElementById('subjReady');
-  subj.textContent=d.subjective.readiness;
-  subj.className='pill '+(/good|optimal|great|strong/i.test(d.subjective.readiness)?'good':'warn');
-  document.getElementById('niggle').textContent=d.subjective.niggle;
-  document.getElementById('note').textContent=d.subjective.note;
-
-  // context
+  const sEl=document.getElementById('readyStatus');sEl.textContent=status;sEl.className='ring-status '+(r>=85?'good':r>=70?'warn':'bad');
+  const circ=496,off=circ-(r/100)*circ;
+  setTimeout(()=>{const rg=document.getElementById('ring');rg.style.transition='stroke-dashoffset 1.1s ease';rg.style.strokeDashoffset=off;},80);
+  const rhr=d.latest.rhr,hrv=d.latest.hrv,aR=d.baselines.avg_rhr_14d,aH=d.baselines.avg_hrv_14d;
+  document.getElementById('rhrV').innerHTML=rhr+'<small> bpm</small>';document.getElementById('rhrAvg').textContent='14d avg '+aR+' bpm';
+  const rhrD=document.getElementById('rhrD'),rDiff=(rhr-aR).toFixed(1);
+  rhrD.textContent=rhr<aR?'▼ '+Math.abs(rDiff)+' below avg':rhr>aR?'▲ '+rDiff+' above avg':'at avg';rhrD.className='d '+(rhr<=aR?'good':'warn');
+  document.getElementById('hrvV').innerHTML=hrv+'<small> ms</small>';document.getElementById('hrvAvg').textContent='14d avg '+aH+' ms';
+  const hrvD=document.getElementById('hrvD'),hDiff=(hrv-aH).toFixed(1);
+  hrvD.textContent=hrv>aH?'▲ '+hDiff+' above avg':hrv<aH?'▼ '+Math.abs(hDiff)+' below avg':'at avg';hrvD.className='d '+(hrv>=aH?'good':'warn');
+  document.getElementById('sleepV').textContent=d.latest.sleep.total;
+  document.getElementById('sleepSub').textContent='Deep '+(d.latest.sleep.deep_minutes/60).toFixed(1)+'h · REM '+(d.latest.sleep.rem_minutes/60).toFixed(1)+'h';
+  const td=d.latest.temp_dev;document.getElementById('tempV').innerHTML=(td>0?'+':'')+td+'<small> °F</small>';
+  const tD=document.getElementById('tempD'),flagged=Math.abs(td)>=d.baselines.temp_flag_threshold;
+  tD.textContent=flagged?'⚠ flag':'in range';tD.className='d '+(flagged?'bad':'good');
+  const st=d.latest.stress;const total=st.stress_high_minutes+st.recovery_high_minutes;
+  const restPct=(st.recovery_high_minutes/total*100).toFixed(0),strPct=(st.stress_high_minutes/total*100).toFixed(0);
+  document.getElementById('stressBar').innerHTML=`<div class="seg restored" style="width:${restPct}%">${restPct>14?'Restored':''}</div><div class="seg stressed" style="width:${strPct}%">${strPct>14?'Stressed':''}</div>`;
+  document.getElementById('restoredLeg').innerHTML='<span class="lime">●</span> Restored '+Math.round(st.recovery_high_minutes/60*10)/10+'h';
+  document.getElementById('stressedLeg').innerHTML='Stressed '+Math.round(st.stress_high_minutes/60*10)/10+'h <span class="bad">●</span>';
+  document.getElementById('stressSummary').textContent='Day summary: '+st.day_summary+' — '+(strPct<35?'recovery outweighed stress':strPct<50?'reasonable balance':'stress-dominant day');
+  document.getElementById('vo2V').textContent=d.latest.vo2max;
+  document.getElementById('cardioV').textContent=d.latest.cardio_age;document.getElementById('cardioSub').textContent='vs 44 actual';
+  const hrvVals=d.trend.map(t=>t.hrv),rhrVals=d.trend.map(t=>t.rhr),rdyVals=d.trend.map(t=>t.readiness),strVals=d.trend.map(t=>t.stress_min);
+  spark(document.getElementById('sparkHRV'),hrvVals,'#f637ec',{baseline:aH});
+  spark(document.getElementById('sparkRHR'),rhrVals,'#22d3ee',{baseline:aR});
+  spark(document.getElementById('sparkRDY'),rdyVals,'#a3e635');
+  spark(document.getElementById('sparkSTR'),strVals,'#fbbf24');
+  document.getElementById('hrvCur').innerHTML=hrvVals.at(-1)+'<small>ms</small>';
+  document.getElementById('rhrCur').innerHTML=rhrVals.at(-1)+'<small>bpm</small>';
+  document.getElementById('rdyCur').textContent=rdyVals.at(-1);
+  document.getElementById('strCur').innerHTML=strVals.at(-1)+'<small>m</small>';
+  const s=d.strava,maxLoad=Math.max(s.acute_7d_mins,s.chronic_28d_weekly_mins);
+  document.getElementById('acuteFill').style.height=(s.acute_7d_mins/maxLoad*100)+'%';
+  document.getElementById('chronicFill').style.height=(s.chronic_28d_weekly_mins/maxLoad*100)+'%';
+  document.getElementById('acuteVal').textContent=Math.round(s.acute_7d_mins/60*10)/10+'h';
+  document.getElementById('chronicVal').textContent=Math.round(s.chronic_28d_weekly_mins/60*10)/10+'h';
+  const acwrN=document.getElementById('acwrN');acwrN.textContent=s.acwr;
+  acwrN.style.color=s.acwr>1.5?'var(--red)':s.acwr<0.8?'var(--amber)':'var(--lime)';
+  document.getElementById('sess7').textContent=s.sessions_7d;
+  document.getElementById('hr7').innerHTML=s.avg_hr_7d+'<span style="font-size:13px;color:var(--muted);"> bpm</span>';
+  document.getElementById('loadCaveat').textContent='⚠ '+s.note;
+  const subj=document.getElementById('subjReady'),good=/good|optimal|great|strong/i.test(d.subjective.readiness);
+  subj.textContent=d.subjective.readiness;subj.style.color=good?'var(--lime)':'var(--amber)';
+  document.getElementById('subjCtx').textContent='Reported "'+d.subjective.readiness+'" as of '+fmtPullTime(d.pulled);
+  document.getElementById('note').textContent=d.subjective.note||'—';
   const sb=document.getElementById('shiftBanner');
-  if(d.context.nightshift_active){
-    sb.className='shift-banner active';
-    document.getElementById('shiftText').innerHTML='<b>Night-shift window active.</b> '+d.context.nightshift_note;
-  }else{
-    sb.className='shift-banner';
-    document.getElementById('shiftText').innerHTML='<b>No active night shift.</b> '+d.context.nightshift_note;
-  }
-  document.getElementById('baselines').innerHTML='RHR '+d.baselines.rhr+'bpm ('+d.baselines.rhr_range+') · HRV '+d.baselines.hrv+'ms · temp flag ±'+d.baselines.temp_flag_threshold+'°F';
-
-  // trend table (most recent first)
-  const tb=document.getElementById('trendBody');
-  tb.innerHTML='';
+  if(d.context.nightshift_active){sb.className='shift-banner active';document.getElementById('shiftText').innerHTML='<b>Night-shift window active.</b> '+d.context.nightshift_note;}
+  else{sb.className='shift-banner';document.getElementById('shiftText').innerHTML='<b>No active night shift.</b> '+d.context.nightshift_note;}
+  document.getElementById('baselines').innerHTML='RHR baseline '+d.baselines.rhr+'bpm ('+d.baselines.rhr_range+') · 14d avg '+aR+'bpm<br>HRV baseline '+d.baselines.hrv+'ms · 14d avg '+aH+'ms<br>Temp flag ±'+d.baselines.temp_flag_threshold+'°F';
+  const tb=document.getElementById('trendBody');tb.innerHTML='';
   [...d.trend].reverse().forEach(t=>{
-    const tr=document.createElement('tr');
-    if(t.flag)tr.className='flagged';
-    tr.innerHTML=`<td>${t.date.slice(5)}</td><td>${t.readiness}</td><td>${t.rhr}</td><td>${t.hrv}</td><td>${t.temp_dev>0?'+':''}${t.temp_dev}</td><td class="flagdot">${t.flag?'⚠':''}</td>`;
+    const tr=document.createElement('tr');if(t.flag)tr.className='flagged';
+    tr.innerHTML=`<td>${t.date.slice(5)}</td><td>${t.readiness}</td><td>${t.rhr}</td><td>${t.hrv}</td><td>${t.stress_min}m</td><td>${t.temp_dev>0?'+':''}${t.temp_dev}</td><td class="flagdot">${t.flag?'⚠':''}</td>`;
     tb.appendChild(tr);
   });
-
-  document.getElementById('footer').textContent='Oura recovery data · '+d.athlete+' · read-only · '+d.pulled;
+  buildSummary(d);
+  document.getElementById('footer').textContent='Oura + Strava · '+d.athlete+' · read-only · pulled '+fmtPullTime(d.pulled);
 }
-
-fetch('oura_data.json',{cache:'no-store'})
-  .then(r=>{if(!r.ok)throw new Error('no file');return r.json();})
-  .then(render)
-  .catch(()=>{
-    document.getElementById('err').style.display='block';
-    document.getElementById('err').textContent='Live oura_data.json not found — showing embedded snapshot.';
-    render(FALLBACK);
-  });
+fetch('oura_data.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('no file');return r.json();}).then(render).catch(()=>{const e=document.getElementById('err');e.style.display='block';e.textContent='Live oura_data.json not found — showing embedded snapshot.';render(FALLBACK);});
 </script>
 </body>
 </html>
