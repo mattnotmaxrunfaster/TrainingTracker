@@ -1,56 +1,56 @@
 {
-  "pulled": "2026-05-31 14:02",
+  "pulled": "2026-05-31 18:56",
   "athlete": "Matt Harris",
   "baselines": {
     "rhr": 57,
     "rhr_range": "56-59",
     "hrv": 43,
     "temp_flag_threshold": 0.5,
-    "avg_rhr_14d": 50.6,
-    "avg_hrv_14d": 41.7
+    "avg_rhr_14d": 50.9,
+    "avg_hrv_14d": 42.4
   },
   "latest": {
     "date": "2026-05-31",
     "readiness": 86,
     "readiness_label": "Optimal",
     "contributors": {
+      "activity_balance": 64,
+      "body_temperature": 100,
       "hrv_balance": 88,
-      "resting_hr": 96,
-      "recovery_index": 67,
-      "body_temp": 100,
-      "sleep_balance": 84,
       "previous_day_activity": 100,
-      "previous_night": 98
+      "previous_night": 98,
+      "recovery_index": 67,
+      "resting_heart_rate": 96,
+      "sleep_balance": 84,
+      "sleep_regularity": 83
     },
     "sleep": {
       "total": "8h39m",
       "total_minutes": 519,
-      "deep_minutes": 93,
+      "deep_minutes": 94,
       "rem_minutes": 128,
       "light_minutes": 297,
-      "awake_minutes": 108,
-      "bedtime": "00:36",
-      "wake": "11:04"
+      "awake_minutes": 109
     },
     "rhr": 50,
     "hrv": 44,
     "temp_dev": -0.1,
-    "resp_rate": 14.2,
+    "resp_rate": 14.25,
     "stress": {
-      "stress_high_minutes": 142,
-      "recovery_high_minutes": 318,
-      "day_summary": "balanced"
+      "stress_high_minutes": 15,
+      "recovery_high_minutes": 15,
+      "day_summary": "normal"
     },
     "resilience": {
       "level": "solid",
       "contributors": {
-        "sleep_recovery": 78,
-        "daytime_recovery": 71,
-        "stress": 64
+        "sleep_recovery": 58.9,
+        "daytime_recovery": 52.4,
+        "stress": 47.8
       }
     },
-    "vo2max": 52.4,
-    "cardio_age": 38
+    "vo2max": null,
+    "cardio_age": 44
   },
   "trend": [
     {
@@ -59,39 +59,39 @@
       "rhr": 51,
       "hrv": 41,
       "temp_dev": 0.0,
-      "flag": false,
-      "stress_min": 120,
-      "resilience": "solid"
+      "stress_min": 90,
+      "resilience": "strong",
+      "flag": false
     },
     {
       "date": "2026-05-19",
       "readiness": 68,
       "rhr": 51,
       "hrv": 39,
-      "temp_dev": 0.2,
-      "flag": true,
-      "stress_min": 165,
-      "resilience": "adequate"
+      "temp_dev": 0.3,
+      "stress_min": 15,
+      "resilience": "strong",
+      "flag": false
     },
     {
       "date": "2026-05-20",
       "readiness": 94,
       "rhr": 49,
       "hrv": 44,
-      "temp_dev": 0.3,
-      "flag": false,
-      "stress_min": 98,
-      "resilience": "strong"
+      "temp_dev": 0.6,
+      "stress_min": 60,
+      "resilience": "strong",
+      "flag": true
     },
     {
       "date": "2026-05-21",
       "readiness": 71,
       "rhr": 53,
       "hrv": 29,
-      "temp_dev": -0.3,
-      "flag": true,
-      "stress_min": 180,
-      "resilience": "adequate"
+      "temp_dev": -0.6,
+      "stress_min": 165,
+      "resilience": "solid",
+      "flag": true
     },
     {
       "date": "2026-05-22",
@@ -99,19 +99,19 @@
       "rhr": 55,
       "hrv": 23,
       "temp_dev": 0.0,
-      "flag": true,
-      "stress_min": 210,
-      "resilience": "limited"
+      "stress_min": 195,
+      "resilience": "solid",
+      "flag": true
     },
     {
       "date": "2026-05-23",
       "readiness": 71,
       "rhr": 50,
       "hrv": 38,
-      "temp_dev": 0.0,
-      "flag": true,
-      "stress_min": 175,
-      "resilience": "adequate"
+      "temp_dev": -0.1,
+      "stress_min": 30,
+      "resilience": "solid",
+      "flag": true
     },
     {
       "date": "2026-05-24",
@@ -119,19 +119,19 @@
       "rhr": 50,
       "hrv": 44,
       "temp_dev": 0.1,
-      "flag": false,
-      "stress_min": 130,
-      "resilience": "solid"
+      "stress_min": 90,
+      "resilience": "solid",
+      "flag": false
     },
     {
       "date": "2026-05-25",
       "readiness": 76,
       "rhr": 50,
       "hrv": 50,
-      "temp_dev": 0.1,
-      "flag": false,
-      "stress_min": 110,
-      "resilience": "solid"
+      "temp_dev": 0.2,
+      "stress_min": 30,
+      "resilience": "solid",
+      "flag": false
     },
     {
       "date": "2026-05-26",
@@ -139,9 +139,9 @@
       "rhr": 50,
       "hrv": 44,
       "temp_dev": -0.1,
-      "flag": false,
-      "stress_min": 125,
-      "resilience": "strong"
+      "stress_min": 30,
+      "resilience": "solid",
+      "flag": false
     },
     {
       "date": "2026-05-27",
@@ -149,39 +149,39 @@
       "rhr": 46,
       "hrv": 64,
       "temp_dev": 0.1,
-      "flag": false,
-      "stress_min": 90,
-      "resilience": "strong"
+      "stress_min": 60,
+      "resilience": "solid",
+      "flag": false
     },
     {
       "date": "2026-05-28",
       "readiness": 83,
       "rhr": 51,
       "hrv": 42,
-      "temp_dev": 0.2,
-      "flag": false,
-      "stress_min": 140,
-      "resilience": "solid"
+      "temp_dev": 0.3,
+      "stress_min": 120,
+      "resilience": "solid",
+      "flag": false
     },
     {
       "date": "2026-05-29",
       "readiness": 76,
-      "rhr": 50,
-      "hrv": 38,
-      "temp_dev": 0.1,
-      "flag": true,
-      "stress_min": 160,
-      "resilience": "solid"
+      "rhr": 55,
+      "hrv": 47,
+      "temp_dev": 0.2,
+      "stress_min": 15,
+      "resilience": "solid",
+      "flag": false
     },
     {
       "date": "2026-05-30",
       "readiness": 80,
       "rhr": 52,
       "hrv": 44,
-      "temp_dev": 0.2,
-      "flag": false,
-      "stress_min": 150,
-      "resilience": "adequate"
+      "temp_dev": 0.3,
+      "stress_min": 0,
+      "resilience": "solid",
+      "flag": false
     },
     {
       "date": "2026-05-31",
@@ -189,32 +189,25 @@
       "rhr": 50,
       "hrv": 44,
       "temp_dev": -0.1,
-      "flag": false,
-      "stress_min": 142,
-      "resilience": "solid"
+      "stress_min": 15,
+      "resilience": "solid",
+      "flag": false
     }
   ],
-  "activity": {
-    "date": "2026-05-30",
-    "score": 100,
-    "steps": 11805,
-    "active_cal": 601,
-    "total_cal": 2616
-  },
   "subjective": {
     "readiness": "Good",
-    "note": "Strength Fri night, lever intervals Sat PM. Hams only tight group."
+    "note": "Strength Sat night, lever intervals Sun PM. Hams only tight group, Right soleus about a 2?."
   },
   "context": {
     "nightshift_active": false,
     "nightshift_note": "On-call cycle every 6 weeks (Fri 01:30–Sun 01:30). Expect HRV dip + RHR rise 2–3 days post-shift — not overtraining."
   },
   "strava": {
-    "pulled": "2026-05-31 15:00",
-    "acute_7d_mins": 288,
-    "chronic_28d_weekly_mins": 198,
-    "acwr": 1.46,
+    "acute_7d_mins": 293,
+    "chronic_28d_weekly_mins": 211,
+    "acwr": 1.39,
     "sessions_7d": 5,
-    "note": "Duration-based load (moving time). Treadmill lever sessions: pace/power/TSS invalid (85% BW). Outdoor rides: power estimated, unreliable. HR not aggregated across mixed session types as it would mislead. ACWR sweet spot ~0.8-1.3 (Gabbett 2016) — discussion aid, not a verdict."
+    "pulled": "2026-05-31 18:57",
+    "note": "Duration-based load (moving time). Treadmill lever sessions: pace/power/TSS invalid (85% BW). Outdoor rides: power estimated, unreliable. HR not aggregated across mixed session types as it would mislead. ACWR sweet spot ~0.8-1.3 (Gabbett 2016)   discussion aid, not a verdict."
   }
 }
