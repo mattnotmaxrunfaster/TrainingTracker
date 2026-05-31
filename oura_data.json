@@ -1,0 +1,70 @@
+{
+  "pulled": "2026-05-31 14:02",
+  "athlete": "Matt Harris",
+  "baselines": {
+    "rhr": 57,
+    "rhr_range": "56-59",
+    "hrv": 43,
+    "temp_flag_threshold": 0.5
+  },
+  "latest": {
+    "date": "2026-05-31",
+    "readiness": 86,
+    "readiness_label": "Optimal",
+    "contributors": {
+      "hrv_balance": 88,
+      "resting_hr": 96,
+      "recovery_index": 67,
+      "body_temp": 100,
+      "sleep_balance": 84,
+      "previous_day_activity": 100,
+      "previous_night": 98
+    },
+    "sleep": {
+      "total": "8h39m",
+      "total_minutes": 519,
+      "deep_minutes": 93,
+      "rem_minutes": 128,
+      "light_minutes": 297,
+      "awake_minutes": 108,
+      "bedtime": "00:36",
+      "wake": "11:04"
+    },
+    "rhr": 50,
+    "hrv": 44,
+    "temp_dev": -0.1,
+    "resp_rate": 14.2
+  },
+  "trend": [
+    { "date": "2026-05-18", "readiness": 86, "rhr": 51, "hrv": 41, "temp_dev": 0.0, "flag": false },
+    { "date": "2026-05-19", "readiness": 68, "rhr": 51, "hrv": 39, "temp_dev": 0.2, "flag": true },
+    { "date": "2026-05-20", "readiness": 94, "rhr": 49, "hrv": 44, "temp_dev": 0.3, "flag": false },
+    { "date": "2026-05-21", "readiness": 71, "rhr": 53, "hrv": 29, "temp_dev": -0.3, "flag": true },
+    { "date": "2026-05-22", "readiness": 72, "rhr": 55, "hrv": 23, "temp_dev": 0.0, "flag": true },
+    { "date": "2026-05-23", "readiness": 71, "rhr": 50, "hrv": 38, "temp_dev": 0.0, "flag": true },
+    { "date": "2026-05-24", "readiness": 78, "rhr": 50, "hrv": 44, "temp_dev": 0.1, "flag": false },
+    { "date": "2026-05-25", "readiness": 76, "rhr": 50, "hrv": 50, "temp_dev": 0.1, "flag": false },
+    { "date": "2026-05-26", "readiness": 80, "rhr": 50, "hrv": 44, "temp_dev": -0.1, "flag": false },
+    { "date": "2026-05-27", "readiness": 87, "rhr": 46, "hrv": 64, "temp_dev": 0.1, "flag": false },
+    { "date": "2026-05-28", "readiness": 83, "rhr": 51, "hrv": 42, "temp_dev": 0.2, "flag": false },
+    { "date": "2026-05-29", "readiness": 76, "rhr": 50, "hrv": 38, "temp_dev": 0.1, "flag": true },
+    { "date": "2026-05-30", "readiness": 80, "rhr": 52, "hrv": 44, "temp_dev": 0.2, "flag": false },
+    { "date": "2026-05-31", "readiness": 86, "rhr": 50, "hrv": 44, "temp_dev": -0.1, "flag": false }
+  ],
+  "activity": {
+    "date": "2026-05-30",
+    "score": 100,
+    "steps": 11805,
+    "active_cal": 601,
+    "total_cal": 2616
+  },
+  "subjective": {
+    "readiness": "Good",
+    "niggle": "Soleus quiet \u00b7 hamstring DOMS post-strength",
+    "note": "Strength Fri night, lever intervals Sat PM. Hams only tight group."
+  },
+  "context": {
+    "nightshift_active": false,
+    "nightshift_note": "On-call cycle every 6 weeks (Fri 01:30\u2013Sun 01:30). Expect HRV dip + RHR rise 2\u20133 days post-shift \u2014 not overtraining."
+  }
+}

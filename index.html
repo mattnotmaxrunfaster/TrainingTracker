@@ -3,763 +3,345 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Matt Harris — Sub-20 Training Tracker</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Matt — Recovery Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0a0a0c;
-    --surface: #111114;
-    --surface2: #18181d;
-    --border: #222228;
-    --accent: #fc4c02;
-    --accent2: #e8b84b;
-    --green: #4caf7d;
-    --red: #e05555;
-    --blue: #4a9eff;
-    --purple: #9b6dff;
-    --text: #e8e8ec;
-    --muted: #666672;
-    --mono: 'DM Mono', monospace;
-    --sans: 'DM Sans', sans-serif;
-    --display: 'Bebas Neue', sans-serif;
+  :root{
+    --bg:#0d0d0f;
+    --panel:#16161a;
+    --panel2:#1d1d22;
+    --line:#2a2a30;
+    --orange:#fc4c02;
+    --orange-dim:#c43c05;
+    --text:#f4f4f5;
+    --muted:#8a8a93;
+    --green:#4caf6d;
+    --amber:#e0a73a;
+    --red:#e0563a;
   }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    min-height: 100vh;
-    overflow-x: hidden;
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Barlow',system-ui,sans-serif;
+    font-weight:300;
+    line-height:1.5;
+    padding:24px 16px 60px;
+    -webkit-font-smoothing:antialiased;
   }
-
-  /* Grain overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0.4;
+  .wrap{max-width:880px;margin:0 auto;}
+  header{
+    display:flex;align-items:baseline;justify-content:space-between;
+    border-bottom:2px solid var(--orange);
+    padding-bottom:10px;margin-bottom:8px;flex-wrap:wrap;gap:6px;
   }
-
-  .header {
-    padding: 40px 40px 0;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 24px;
+  h1{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:1px;font-weight:400;line-height:1;}
+  h1 span{color:var(--orange);}
+  .pulled{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:1px;}
+  .subtitle{color:var(--muted);font-size:13px;margin-bottom:24px;letter-spacing:.3px;}
+  .grid{display:grid;gap:14px;}
+  .row{display:grid;gap:14px;grid-template-columns:1fr;}
+  @media(min-width:680px){
+    .row.two{grid-template-columns:300px 1fr;}
+    .row.three{grid-template-columns:1fr 1fr 1fr;}
   }
-
-  .header-left h1 {
-    font-family: var(--display);
-    font-size: 64px;
-    letter-spacing: 2px;
-    line-height: 1;
-    color: var(--text);
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 20px;
   }
-
-  .header-left h1 span {
-    color: var(--accent);
+  .panel h2{
+    font-family:'Bebas Neue',sans-serif;font-weight:400;
+    font-size:18px;letter-spacing:1.5px;color:var(--muted);
+    text-transform:uppercase;margin-bottom:14px;
   }
-
-  .header-left p {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-top: 6px;
+  /* readiness hero */
+  .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+  .ring-wrap{position:relative;width:180px;height:180px;}
+  .ring-wrap svg{transform:rotate(-90deg);}
+  .ring-val{
+    position:absolute;inset:0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
   }
-
-  .target-badge {
-    background: var(--surface2);
-    border: 1px solid var(--accent);
-    border-radius: 4px;
-    padding: 12px 20px;
-    text-align: right;
+  .ring-num{font-family:'Bebas Neue',sans-serif;font-size:64px;line-height:.85;}
+  .ring-label{font-size:12px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-top:4px;}
+  .ring-status{font-size:13px;letter-spacing:1px;margin-top:10px;font-weight:500;}
+  /* stat tiles */
+  .tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .tile{background:var(--panel2);border-radius:8px;padding:12px 14px;}
+  .tile .k{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
+  .tile .v{font-family:'Bebas Neue',sans-serif;font-size:30px;line-height:1;margin-top:2px;}
+  .tile .v small{font-family:'Barlow';font-size:13px;color:var(--muted);font-weight:400;letter-spacing:0;}
+  .tile .d{font-size:11px;margin-top:3px;letter-spacing:.3px;}
+  .good{color:var(--green);}.warn{color:var(--amber);}.bad{color:var(--red);}
+  /* sparkline */
+  .spark-row{display:flex;align-items:center;gap:14px;margin-bottom:12px;}
+  .spark-row:last-child{margin-bottom:0;}
+  .spark-lab{width:46px;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
+  .spark-cur{font-family:'Bebas Neue',sans-serif;font-size:24px;width:54px;text-align:right;}
+  .spark-cur small{font-family:'Barlow';font-size:11px;color:var(--muted);font-weight:400;}
+  .spark svg{display:block;}
+  /* trend table */
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{text-align:right;padding:6px 8px;border-bottom:1px solid var(--line);}
+  th:first-child,td:first-child{text-align:left;}
+  th{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:500;}
+  tr.flagged td{background:rgba(224,167,58,.06);}
+  .flagdot{color:var(--amber);font-size:11px;}
+  /* subjective / context */
+  .field{margin-bottom:12px;}
+  .field:last-child{margin-bottom:0;}
+  .field .lab{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:3px;}
+  .field .val{font-size:15px;}
+  .pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;letter-spacing:.5px;font-weight:500;}
+  .pill.good{background:rgba(76,175,109,.15);color:var(--green);}
+  .pill.warn{background:rgba(224,167,58,.15);color:var(--amber);}
+  .shift-banner{
+    border-left:3px solid var(--orange);background:var(--panel2);
+    padding:10px 14px;border-radius:6px;font-size:13px;color:var(--muted);
   }
-
-  .target-badge .label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-
-  .target-badge .time {
-    font-family: var(--display);
-    font-size: 42px;
-    color: var(--accent);
-    letter-spacing: 2px;
-    line-height: 1.1;
-  }
-
-  .target-badge .sub {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-  }
-
-  .grid {
-    padding: 32px 40px;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 16px;
-  }
-
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 20px;
-    position: relative;
-    overflow: hidden;
-    animation: fadeIn 0.4s ease forwards;
-    opacity: 0;
-  }
-
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--accent);
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
-  .card:hover::before { opacity: 1; }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .card:nth-child(1) { animation-delay: 0.05s; }
-  .card:nth-child(2) { animation-delay: 0.10s; }
-  .card:nth-child(3) { animation-delay: 0.15s; }
-  .card:nth-child(4) { animation-delay: 0.20s; }
-  .card:nth-child(5) { animation-delay: 0.25s; }
-  .card:nth-child(6) { animation-delay: 0.30s; }
-  .card:nth-child(7) { animation-delay: 0.35s; }
-  .card:nth-child(8) { animation-delay: 0.40s; }
-
-  .card-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-
-  .card-value {
-    font-family: var(--display);
-    font-size: 48px;
-    letter-spacing: 1px;
-    line-height: 1;
-  }
-
-  .card-sub {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 6px;
-  }
-
-  .card-flag {
-    font-family: var(--mono);
-    font-size: 11px;
-    margin-top: 8px;
-    padding: 4px 8px;
-    border-radius: 3px;
-    display: inline-block;
-  }
-
-  .flag-good { background: rgba(76,175,125,0.15); color: var(--green); }
-  .flag-warn { background: rgba(224,85,85,0.15); color: var(--red); }
-  .flag-neutral { background: rgba(74,158,255,0.15); color: var(--blue); }
-
-  /* Span helpers */
-  .col-3 { grid-column: span 3; }
-  .col-4 { grid-column: span 4; }
-  .col-6 { grid-column: span 6; }
-  .col-8 { grid-column: span 8; }
-  .col-12 { grid-column: span 12; }
-
-  /* Gap progress bar */
-  .gap-bar {
-    margin-top: 16px;
-    height: 6px;
-    background: var(--surface2);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-
-  .gap-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    border-radius: 3px;
-    transition: width 1s cubic-bezier(0.4,0,0.2,1);
-  }
-
-  .gap-label {
-    display: flex;
-    justify-content: space-between;
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    margin-top: 6px;
-  }
-
-  /* HRV Chart */
-  .chart-area {
-    margin-top: 16px;
-    height: 80px;
-    position: relative;
-  }
-
-  svg.sparkline {
-    width: 100%;
-    height: 100%;
-    overflow: visible;
-  }
-
-  /* Week table */
-  .week-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: var(--mono);
-    font-size: 11px;
-  }
-
-  .week-table th {
-    color: var(--muted);
-    text-align: left;
-    padding: 6px 8px;
-    border-bottom: 1px solid var(--border);
-    letter-spacing: 1px;
-    font-weight: 400;
-  }
-
-  .week-table td {
-    padding: 8px 8px;
-    border-bottom: 1px solid rgba(34,34,40,0.5);
-    color: var(--text);
-  }
-
-  .week-table tr:last-child td { border-bottom: none; }
-
-  .week-table .day-label {
-    color: var(--muted);
-    font-size: 10px;
-  }
-
-  .dot {
-    display: inline-block;
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    margin-right: 6px;
-    vertical-align: middle;
-  }
-
-  .dot-run { background: var(--green); }
-  .dot-ride { background: var(--blue); }
-  .dot-strength { background: var(--purple); }
-  .dot-rest { background: var(--border); }
-  .dot-lever { background: var(--accent2); }
-
-  /* Limiter bars */
-  .limiter-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-
-  .limiter-name {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 1px;
-    width: 160px;
-    flex-shrink: 0;
-  }
-
-  .limiter-bar-bg {
-    flex: 1;
-    height: 4px;
-    background: var(--surface2);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .limiter-bar-fill {
-    height: 100%;
-    border-radius: 2px;
-  }
-
-  .limiter-pct {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    width: 32px;
-    text-align: right;
-    flex-shrink: 0;
-  }
-
-  /* Readiness ring */
-  .readiness-wrap {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-top: 8px;
-  }
-
-  .ring-svg { width: 80px; height: 80px; flex-shrink: 0; }
-
-  .readiness-detail { flex: 1; }
-
-  .contrib-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    padding: 3px 0;
-    border-bottom: 1px solid rgba(34,34,40,0.4);
-  }
-
-  .contrib-row:last-child { border-bottom: none; }
-
-  .contrib-score {
-    font-size: 11px;
-    font-weight: 500;
-  }
-
-  .score-high { color: var(--green); }
-  .score-mid { color: var(--accent2); }
-  .score-low { color: var(--red); }
-
-  /* Pace comparison */
-  .pace-rows { margin-top: 12px; }
-
-  .pace-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-
-  .pace-row-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    width: 100px;
-    flex-shrink: 0;
-  }
-
-  .pace-row-bar {
-    flex: 1;
-    height: 16px;
-    background: var(--surface2);
-    border-radius: 2px;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .pace-row-fill {
-    height: 100%;
-    border-radius: 2px;
-    display: flex;
-    align-items: center;
-    padding-left: 8px;
-    font-family: var(--mono);
-    font-size: 9px;
-    font-weight: 500;
-    white-space: nowrap;
-  }
-
-  .section-divider {
-    grid-column: span 12;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 8px 0 0;
-  }
-
-  .section-divider span {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
-  .section-divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  .footer {
-    padding: 16px 40px 32px;
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    border-top: 1px solid var(--border);
-    letter-spacing: 1px;
-  }
-
-  .update-note {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent2);
-    border-radius: 4px;
-    padding: 12px 16px;
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    line-height: 1.8;
-    letter-spacing: 0.5px;
-  }
-
-  @media (max-width: 900px) {
-    .header { flex-direction: column; align-items: flex-start; gap: 16px; padding: 24px 20px 20px; }
-    .header-left h1 { font-size: 44px; }
-    .grid { padding: 20px; gap: 12px; }
-    .col-3, .col-4, .col-6, .col-8 { grid-column: span 12; }
-  }
+  .shift-banner.active{border-color:var(--amber);color:var(--text);}
+  .shift-banner b{color:var(--text);font-weight:500;}
+  footer{margin-top:24px;text-align:center;color:var(--muted);font-size:11px;letter-spacing:.5px;}
+  .err{color:var(--amber);font-size:12px;text-align:center;margin-bottom:14px;display:none;}
 </style>
 </head>
 <body>
+<div class="wrap">
+  <header>
+    <h1>RECOVERY <span>READINESS</span></h1>
+    <div class="pulled" id="pulled">—</div>
+  </header>
+  <div class="subtitle" id="subtitle">Oura recovery overview · for coaching review</div>
+  <div class="err" id="err"></div>
 
-<div class="header">
-  <div class="header-left">
-    <h1>MATT <span>HARRIS</span></h1>
-    <p>Sub-20 5k Campaign &nbsp;·&nbsp; Season 2026 &nbsp;·&nbsp; Updated 26 May 2026</p>
+  <div class="grid">
+    <!-- top row: readiness ring + key stats -->
+    <div class="row two">
+      <div class="panel hero">
+        <h2 style="align-self:flex-start;">Readiness</h2>
+        <div class="ring-wrap">
+          <svg width="180" height="180" viewBox="0 0 180 180">
+            <circle cx="90" cy="90" r="78" fill="none" stroke="#2a2a30" stroke-width="14"/>
+            <circle id="ring" cx="90" cy="90" r="78" fill="none" stroke="var(--orange)" stroke-width="14" stroke-linecap="round" stroke-dasharray="490" stroke-dashoffset="490"/>
+          </svg>
+          <div class="ring-val">
+            <div class="ring-num" id="readyNum">—</div>
+            <div class="ring-label">/ 100</div>
+          </div>
+        </div>
+        <div class="ring-status" id="readyStatus">—</div>
+      </div>
+
+      <div class="panel">
+        <h2>Today's Markers</h2>
+        <div class="tiles">
+          <div class="tile">
+            <div class="k">Resting HR</div>
+            <div class="v" id="rhrV">—<small> bpm</small></div>
+            <div class="d" id="rhrD">—</div>
+          </div>
+          <div class="tile">
+            <div class="k">HRV</div>
+            <div class="v" id="hrvV">—<small> ms</small></div>
+            <div class="d" id="hrvD">—</div>
+          </div>
+          <div class="tile">
+            <div class="k">Sleep</div>
+            <div class="v" id="sleepV">—</div>
+            <div class="d" id="sleepD">—</div>
+          </div>
+          <div class="tile">
+            <div class="k">Temp Dev</div>
+            <div class="v" id="tempV">—<small> °F</small></div>
+            <div class="d" id="tempD">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- trends sparklines -->
+    <div class="panel">
+      <h2>14-Day Trends</h2>
+      <div class="spark-row">
+        <div class="spark-lab">HRV</div>
+        <div class="spark" id="sparkHRV"></div>
+        <div class="spark-cur" id="hrvCur">—<small>ms</small></div>
+      </div>
+      <div class="spark-row">
+        <div class="spark-lab">RHR</div>
+        <div class="spark" id="sparkRHR"></div>
+        <div class="spark-cur" id="rhrCur">—<small>bpm</small></div>
+      </div>
+      <div class="spark-row">
+        <div class="spark-lab">Ready</div>
+        <div class="spark" id="sparkRDY"></div>
+        <div class="spark-cur" id="rdyCur">—</div>
+      </div>
+    </div>
+
+    <!-- subjective + shift context -->
+    <div class="row two">
+      <div class="panel">
+        <h2>Athlete Status</h2>
+        <div class="field">
+          <div class="lab">Subjective Readiness</div>
+          <div class="val"><span class="pill good" id="subjReady">—</span></div>
+        </div>
+        <div class="field">
+          <div class="lab">Current Niggle</div>
+          <div class="val" id="niggle">—</div>
+        </div>
+        <div class="field">
+          <div class="lab">Note</div>
+          <div class="val" id="note" style="font-size:13px;color:var(--muted);">—</div>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Recovery Context</h2>
+        <div class="shift-banner" id="shiftBanner">
+          <span id="shiftText">—</span>
+        </div>
+        <div class="field" style="margin-top:14px;">
+          <div class="lab">Baselines</div>
+          <div class="val" style="font-size:13px;color:var(--muted);" id="baselines">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- full trend table -->
+    <div class="panel">
+      <h2>Daily Detail</h2>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr><th>Date</th><th>Ready</th><th>RHR</th><th>HRV</th><th>Temp</th><th></th></tr>
+          </thead>
+          <tbody id="trendBody"></tbody>
+        </table>
+      </div>
+    </div>
   </div>
-  <div class="target-badge">
-    <div class="label">Target</div>
-    <div class="time">19:59</div>
-    <div class="sub">6:26 / mile</div>
-  </div>
+
+  <footer id="footer">Oura recovery data · read-only · updated weekly</footer>
 </div>
 
-<div class="grid">
+<script>
+// Embedded fallback so the page still renders if oura_data.json can't be fetched (e.g. opened locally)
+const FALLBACK = {"pulled":"2026-05-31 14:02","athlete":"Matt Harris","baselines":{"rhr":57,"rhr_range":"56-59","hrv":43,"temp_flag_threshold":0.5},"latest":{"date":"2026-05-31","readiness":86,"readiness_label":"Optimal","contributors":{},"sleep":{"total":"8h39m","total_minutes":519,"deep_minutes":93,"rem_minutes":128,"light_minutes":297,"awake_minutes":108},"rhr":50,"hrv":44,"temp_dev":-0.1,"resp_rate":14.2},"trend":[{"date":"2026-05-18","readiness":86,"rhr":51,"hrv":41,"temp_dev":0.0,"flag":false},{"date":"2026-05-19","readiness":68,"rhr":51,"hrv":39,"temp_dev":0.2,"flag":true},{"date":"2026-05-20","readiness":94,"rhr":49,"hrv":44,"temp_dev":0.3,"flag":false},{"date":"2026-05-21","readiness":71,"rhr":53,"hrv":29,"temp_dev":-0.3,"flag":true},{"date":"2026-05-22","readiness":72,"rhr":55,"hrv":23,"temp_dev":0.0,"flag":true},{"date":"2026-05-23","readiness":71,"rhr":50,"hrv":38,"temp_dev":0.0,"flag":true},{"date":"2026-05-24","readiness":78,"rhr":50,"hrv":44,"temp_dev":0.1,"flag":false},{"date":"2026-05-25","readiness":76,"rhr":50,"hrv":50,"temp_dev":0.1,"flag":false},{"date":"2026-05-26","readiness":80,"rhr":50,"hrv":44,"temp_dev":-0.1,"flag":false},{"date":"2026-05-27","readiness":87,"rhr":46,"hrv":64,"temp_dev":0.1,"flag":false},{"date":"2026-05-28","readiness":83,"rhr":51,"hrv":42,"temp_dev":0.2,"flag":false},{"date":"2026-05-29","readiness":76,"rhr":50,"hrv":38,"temp_dev":0.1,"flag":true},{"date":"2026-05-30","readiness":80,"rhr":52,"hrv":44,"temp_dev":0.2,"flag":false},{"date":"2026-05-31","readiness":86,"rhr":50,"hrv":44,"temp_dev":-0.1,"flag":false}],"activity":{"date":"2026-05-30","score":100,"steps":11805,"active_cal":601,"total_cal":2616},"subjective":{"readiness":"Good","niggle":"Soleus quiet · hamstring DOMS post-strength","note":"Strength Fri night, lever intervals Sat PM. Hams only tight group."},"context":{"nightshift_active":false,"nightshift_note":"On-call cycle every 6 weeks (Fri 01:30–Sun 01:30). Expect HRV dip + RHR rise 2–3 days post-shift — not overtraining."}};
 
-  <!-- SECTION: STATUS -->
-  <div class="section-divider col-12"><span>Current Status</span></div>
+function spark(el, vals, color, {invert=false, baseline=null}={}){
+  const w=180,h=34,pad=4;
+  const min=Math.min(...vals), max=Math.max(...vals);
+  const range=(max-min)||1;
+  const x=i=>pad+(i*(w-2*pad)/(vals.length-1));
+  const y=v=>h-pad-((v-min)/range)*(h-2*pad);
+  let pts=vals.map((v,i)=>`${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
+  let base='';
+  if(baseline!=null && baseline>=min && baseline<=max){
+    const by=y(baseline).toFixed(1);
+    base=`<line x1="${pad}" y1="${by}" x2="${w-pad}" y2="${by}" stroke="#8a8a93" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>`;
+  }
+  const last=vals[vals.length-1];
+  const lx=x(vals.length-1).toFixed(1), ly=y(last).toFixed(1);
+  el.innerHTML=`<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
+    ${base}
+    <polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="${lx}" cy="${ly}" r="3" fill="${color}"/>
+  </svg>`;
+}
 
-  <!-- PB Card -->
-  <div class="card col-3">
-    <div class="card-label">5k PB (MTSS, 2024)</div>
-    <div class="card-value" style="color:var(--accent2)">24:19</div>
-    <div class="card-sub">7:46/mi avg &nbsp;·&nbsp; 185bpm avg</div>
-    <div class="card-flag flag-neutral">Ran with active MTSS — not true ceiling</div>
-  </div>
+function render(d){
+  // pulled / subtitle
+  document.getElementById('pulled').textContent='Pulled '+d.pulled;
+  document.getElementById('subtitle').textContent=d.athlete+' · Oura recovery overview · for coaching review';
 
-  <!-- Gap Card -->
-  <div class="card col-3">
-    <div class="card-label">Gap to Sub-20</div>
-    <div class="card-value" style="color:var(--accent)">4:20</div>
-    <div class="card-sub">1:20/mi pace improvement needed</div>
-    <div class="gap-bar">
-      <div class="gap-bar-fill" style="width: 28%"></div>
-    </div>
-    <div class="gap-label">
-      <span>24:19 current</span>
-      <span>19:59 target</span>
-    </div>
-  </div>
+  // readiness ring
+  const r=d.latest.readiness;
+  document.getElementById('readyNum').textContent=r;
+  const status=d.latest.readiness_label||(r>=85?'Optimal':r>=70?'Good':'Pay attention');
+  const sEl=document.getElementById('readyStatus');
+  sEl.textContent=status.toUpperCase();
+  sEl.className='ring-status '+(r>=85?'good':r>=70?'warn':'bad');
+  const circ=490, off=circ-(r/100)*circ;
+  setTimeout(()=>{document.getElementById('ring').style.transition='stroke-dashoffset 1.1s ease';document.getElementById('ring').style.strokeDashoffset=off;},80);
 
-  <!-- Weekly Volume -->
-  <div class="card col-3">
-    <div class="card-label">Weekly Run Volume</div>
-    <div class="card-value" style="color:var(--blue)">4.1</div>
-    <div class="card-sub">miles/week (30-day avg)</div>
-    <div class="gap-bar">
-      <div class="gap-bar-fill" style="width:13%; background: linear-gradient(90deg, var(--blue), var(--purple))"></div>
-    </div>
-    <div class="gap-label">
-      <span>4.1mi now</span>
-      <span>22–31mi target</span>
-    </div>
-  </div>
+  // tiles
+  const rhr=d.latest.rhr, hrv=d.latest.hrv, bRhr=d.baselines.rhr, bHrv=d.baselines.hrv;
+  document.getElementById('rhrV').innerHTML=rhr+'<small> bpm</small>';
+  const rhrD=document.getElementById('rhrD');
+  rhrD.textContent=(rhr<bRhr?'▼ below baseline':rhr>bRhr?'▲ above baseline':'at baseline')+' ('+bRhr+')';
+  rhrD.className='d '+(rhr<=bRhr?'good':'warn');
 
-  <!-- Rehab Phase -->
-  <div class="card col-3">
-    <div class="card-label">MTSS Rehab Phase</div>
-    <div class="card-value" style="color:var(--green)">3</div>
-    <div class="card-sub">of 4 phases &nbsp;·&nbsp; Both legs</div>
-    <div class="card-flag flag-good">No acute pain — soleus tightness only</div>
-  </div>
+  document.getElementById('hrvV').innerHTML=hrv+'<small> ms</small>';
+  const hrvD=document.getElementById('hrvD');
+  hrvD.textContent=(hrv>=bHrv?'▲ at/above baseline':'▼ below baseline')+' ('+bHrv+')';
+  hrvD.className='d '+(hrv>=bHrv?'good':'warn');
 
-  <!-- SECTION: RECOVERY -->
-  <div class="section-divider col-12"><span>Recovery — Last Night (26 May)</span></div>
+  document.getElementById('sleepV').innerHTML=d.latest.sleep.total;
+  document.getElementById('sleepD').textContent='Deep '+Math.round(d.latest.sleep.deep_minutes/60*10)/10+'h · REM '+Math.round(d.latest.sleep.rem_minutes/60*10)/10+'h';
+  document.getElementById('sleepD').className='d';
 
-  <!-- Readiness -->
-  <div class="card col-4">
-    <div class="card-label">Oura Readiness</div>
-    <div class="readiness-wrap">
-      <svg class="ring-svg" viewBox="0 0 80 80">
-        <circle cx="40" cy="40" r="34" fill="none" stroke="#18181d" stroke-width="7"/>
-        <circle cx="40" cy="40" r="34" fill="none" stroke="var(--accent)" stroke-width="7"
-          stroke-dasharray="213.6" stroke-dashoffset="42.7"
-          stroke-linecap="round" transform="rotate(-90 40 40)"/>
-        <text x="40" y="44" text-anchor="middle" fill="var(--text)" font-family="'Bebas Neue'" font-size="22" letter-spacing="1">80</text>
-      </svg>
-      <div class="readiness-detail">
-        <div class="contrib-row"><span>Body Temp</span><span class="contrib-score score-high">100</span></div>
-        <div class="contrib-row"><span>Resting HR</span><span class="contrib-score score-high">98</span></div>
-        <div class="contrib-row"><span>Prev Night</span><span class="contrib-score score-high">96</span></div>
-        <div class="contrib-row"><span>Sleep Balance</span><span class="contrib-score score-high">81</span></div>
-        <div class="contrib-row"><span>Prev Day Act.</span><span class="contrib-score score-mid">72</span></div>
-        <div class="contrib-row"><span>HRV Balance</span><span class="contrib-score score-mid">67</span></div>
-        <div class="contrib-row"><span>Recovery Index</span><span class="contrib-score score-low">57</span></div>
-      </div>
-    </div>
-  </div>
+  const td=d.latest.temp_dev;
+  document.getElementById('tempV').innerHTML=(td>0?'+':'')+td+'<small> °F</small>';
+  const tD=document.getElementById('tempD');
+  const flagged=Math.abs(td)>=d.baselines.temp_flag_threshold;
+  tD.textContent=flagged?'⚠ deviation flag':'within range';
+  tD.className='d '+(flagged?'bad':'good');
 
-  <!-- HRV Sparkline -->
-  <div class="card col-4">
-    <div class="card-label">HRV Trend — 11 Days</div>
-    <div style="display:flex; gap:16px; align-items:baseline; margin-bottom:4px;">
-      <div style="font-family:var(--display); font-size:36px; color:var(--green)">44<span style="font-size:16px; color:var(--muted); font-family:var(--mono)">ms</span></div>
-      <div style="font-family:var(--mono); font-size:10px; color:var(--green)">↑ trending up</div>
-    </div>
-    <div class="chart-area">
-      <svg class="sparkline" viewBox="0 0 300 80" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="hrvGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="var(--green)" stop-opacity="0.3"/>
-            <stop offset="100%" stop-color="var(--green)" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-        <!-- Night shift zone -->
-        <rect x="136" y="0" width="55" height="80" fill="rgba(224,85,85,0.07)" rx="2"/>
-        <text x="163" y="12" text-anchor="middle" fill="var(--red)" font-family="'DM Mono'" font-size="7" opacity="0.6">NIGHT SHIFT</text>
-        <!-- HRV data: 44,43,41,39,44,29,23,38,44,50,44 mapped to 0-80 range (max=55, min=15) -->
-        <polyline fill="none" stroke="var(--green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-          points="0,29 30,31 60,36 90,40 120,29 150,73 180,80 210,43 240,29 270,15 300,29"/>
-        <polygon fill="url(#hrvGrad)"
-          points="0,29 30,31 60,36 90,40 120,29 150,73 180,80 210,43 240,29 270,15 300,29 300,80 0,80"/>
-        <!-- Baseline reference -->
-        <line x1="0" y1="36" x2="300" y2="36" stroke="var(--muted)" stroke-width="0.5" stroke-dasharray="4,4" opacity="0.4"/>
-        <text x="302" y="39" fill="var(--muted)" font-family="'DM Mono'" font-size="8">43ms</text>
-      </svg>
-    </div>
-    <div style="font-family:var(--mono); font-size:9px; color:var(--muted); margin-top:4px;">
-      May 13 ──────────────────────────── May 26
-    </div>
-  </div>
+  // sparklines
+  const hrvVals=d.trend.map(t=>t.hrv);
+  const rhrVals=d.trend.map(t=>t.rhr);
+  const rdyVals=d.trend.map(t=>t.readiness);
+  spark(document.getElementById('sparkHRV'),hrvVals,'#fc4c02',{baseline:bHrv});
+  spark(document.getElementById('sparkRHR'),rhrVals,'#4caf6d',{baseline:bRhr});
+  spark(document.getElementById('sparkRDY'),rdyVals,'#e0a73a');
+  document.getElementById('hrvCur').innerHTML=hrvVals[hrvVals.length-1]+'<small>ms</small>';
+  document.getElementById('rhrCur').innerHTML=rhrVals[rhrVals.length-1]+'<small>bpm</small>';
+  document.getElementById('rdyCur').textContent=rdyVals[rdyVals.length-1];
 
-  <!-- Sleep -->
-  <div class="card col-4">
-    <div class="card-label">Last Night's Sleep</div>
-    <div style="display:flex; gap:20px; margin-top:4px; margin-bottom:14px;">
-      <div>
-        <div style="font-family:var(--display); font-size:36px; color:var(--text)">7h54</div>
-        <div style="font-family:var(--mono); font-size:10px; color:var(--muted)">Total Sleep</div>
-      </div>
-      <div style="margin-top:4px;">
-        <div style="font-family:var(--mono); font-size:11px; color:var(--muted); margin-bottom:2px;">RHR &nbsp;<span style="color:var(--green)">50bpm</span> ✅</div>
-        <div style="font-family:var(--mono); font-size:11px; color:var(--muted); margin-bottom:2px;">HRV &nbsp;<span style="color:var(--text)">44ms</span></div>
-        <div style="font-family:var(--mono); font-size:11px; color:var(--muted); margin-bottom:2px;">Temp &nbsp;<span style="color:var(--text)">-0.08°F</span></div>
-        <div style="font-family:var(--mono); font-size:11px; color:var(--muted)">Resp &nbsp;<span style="color:var(--text)">14.6/min</span></div>
-      </div>
-    </div>
-    <!-- Sleep stage bar -->
-    <div style="height:10px; border-radius:3px; overflow:hidden; display:flex; margin-bottom:6px;">
-      <div style="width:12%; background:var(--purple); opacity:0.8;" title="Deep 57m"></div>
-      <div style="width:22%; background:var(--blue); opacity:0.8;" title="REM 1h47m"></div>
-      <div style="width:66%; background:var(--surface2); border:1px solid var(--border);" title="Light 5h10m"></div>
-    </div>
-    <div style="display:flex; gap:16px; font-family:var(--mono); font-size:9px; color:var(--muted);">
-      <span><span style="color:var(--purple)">■</span> Deep 57m</span>
-      <span><span style="color:var(--blue)">■</span> REM 1h47m</span>
-      <span><span style="color:var(--muted)">■</span> Light 5h10m</span>
-    </div>
-  </div>
+  // subjective
+  const subj=document.getElementById('subjReady');
+  subj.textContent=d.subjective.readiness;
+  subj.className='pill '+(/good|optimal|great|strong/i.test(d.subjective.readiness)?'good':'warn');
+  document.getElementById('niggle').textContent=d.subjective.niggle;
+  document.getElementById('note').textContent=d.subjective.note;
 
-  <!-- SECTION: THIS WEEK -->
-  <div class="section-divider col-12"><span>This Week — w/c 25 May</span></div>
+  // context
+  const sb=document.getElementById('shiftBanner');
+  if(d.context.nightshift_active){
+    sb.className='shift-banner active';
+    document.getElementById('shiftText').innerHTML='<b>Night-shift window active.</b> '+d.context.nightshift_note;
+  }else{
+    sb.className='shift-banner';
+    document.getElementById('shiftText').innerHTML='<b>No active night shift.</b> '+d.context.nightshift_note;
+  }
+  document.getElementById('baselines').innerHTML='RHR '+d.baselines.rhr+'bpm ('+d.baselines.rhr_range+') · HRV '+d.baselines.hrv+'ms · temp flag ±'+d.baselines.temp_flag_threshold+'°F';
 
-  <!-- Week Plan -->
-  <div class="card col-6">
-    <div class="card-label">Training Plan</div>
-    <table class="week-table">
-      <tr><th>Day</th><th>Session</th><th>Load</th><th>Status</th></tr>
-      <tr>
-        <td class="day-label">MON</td>
-        <td><span class="dot dot-ride"></span>80min Moderate Bike</td>
-        <td style="color:var(--muted); font-size:10px;">49 TSS</td>
-        <td style="color:var(--green)">✓ Done</td>
-      </tr>
-      <tr>
-        <td class="day-label">TUE</td>
-        <td><span class="dot dot-rest"></span>Rest Day</td>
-        <td style="color:var(--muted); font-size:10px;">—</td>
-        <td style="color:var(--muted)">—</td>
-      </tr>
-      <tr>
-        <td class="day-label">WED</td>
-        <td><span class="dot dot-run"></span>30min Easy + 5×10s Strides</td>
-        <td style="color:var(--muted); font-size:10px;">Tibial load</td>
-        <td style="color:var(--accent2)">Upcoming</td>
-      </tr>
-      <tr>
-        <td class="day-label">THU</td>
-        <td><span class="dot dot-ride"></span>VO2 Ladder — Bike</td>
-        <td style="color:var(--muted); font-size:10px;">High intensity</td>
-        <td style="color:var(--accent2)">Upcoming</td>
-      </tr>
-      <tr>
-        <td class="day-label">FRI</td>
-        <td><span class="dot dot-ride"></span>60min Easy Bike</td>
-        <td style="color:var(--muted); font-size:10px;">Recovery</td>
-        <td style="color:var(--accent2)">Upcoming</td>
-      </tr>
-      <tr>
-        <td class="day-label">SAT</td>
-        <td><span class="dot dot-strength"></span>Strength Workout 1</td>
-        <td style="color:var(--muted); font-size:10px;">19 sets</td>
-        <td style="color:var(--accent2)">Upcoming</td>
-      </tr>
-      <tr>
-        <td class="day-label">SUN</td>
-        <td><span class="dot dot-lever"></span>Lever: 1mi + 8×1min + 1mi</td>
-        <td style="color:var(--muted); font-size:10px;">85% BW</td>
-        <td style="color:var(--accent2)">Upcoming</td>
-      </tr>
-    </table>
-  </div>
+  // trend table (most recent first)
+  const tb=document.getElementById('trendBody');
+  tb.innerHTML='';
+  [...d.trend].reverse().forEach(t=>{
+    const tr=document.createElement('tr');
+    if(t.flag)tr.className='flagged';
+    tr.innerHTML=`<td>${t.date.slice(5)}</td><td>${t.readiness}</td><td>${t.rhr}</td><td>${t.hrv}</td><td>${t.temp_dev>0?'+':''}${t.temp_dev}</td><td class="flagdot">${t.flag?'⚠':''}</td>`;
+    tb.appendChild(tr);
+  });
 
-  <!-- Pace Comparison -->
-  <div class="card col-6">
-    <div class="card-label">Pace Context — Current vs Target</div>
-    <div class="pace-rows">
-      <div class="pace-row">
-        <div class="pace-row-label">Sub-20 Target</div>
-        <div class="pace-row-bar">
-          <div class="pace-row-fill" style="width:100%; background:var(--accent); color:#fff;">6:26/mi</div>
-        </div>
-      </div>
-      <div class="pace-row">
-        <div class="pace-row-label">PB (MTSS 2024)</div>
-        <div class="pace-row-bar">
-          <div class="pace-row-fill" style="width:83%; background:var(--accent2); color:#000;">7:46/mi</div>
-        </div>
-      </div>
-      <div class="pace-row">
-        <div class="pace-row-label">Outdoor Easy (May)</div>
-        <div class="pace-row-bar">
-          <div class="pace-row-fill" style="width:62%; background:var(--blue); color:#fff;">10:14/mi</div>
-        </div>
-      </div>
-      <div class="pace-row">
-        <div class="pace-row-label">Treadmill Lever</div>
-        <div class="pace-row-bar">
-          <div class="pace-row-fill" style="width:55%; background:var(--purple); color:#fff;">~11:44/mi</div>
-        </div>
-      </div>
-    </div>
-    <div style="margin-top:16px; font-family:var(--mono); font-size:10px; color:var(--muted); line-height:1.8; border-top:1px solid var(--border); padding-top:12px;">
-      Parkrun power: 250W avg · 109% CP · Near-perfect power distribution<br>
-      Easy run power: 190–196W · Z2 Moderate · 83–85% CP<br>
-      Outdoor cadence: 156–159spm &nbsp;|&nbsp; Race cadence: 171spm ✅
-    </div>
-  </div>
+  document.getElementById('footer').textContent='Oura recovery data · '+d.athlete+' · read-only · '+d.pulled;
+}
 
-  <!-- SECTION: LIMITERS -->
-  <div class="section-divider col-12"><span>Performance Limiters</span></div>
-
-  <div class="card col-8">
-    <div class="card-label">Ordered by Priority</div>
-    <div style="margin-top:8px;">
-
-      <div class="limiter-row">
-        <div class="limiter-name">Tibial Load Tolerance</div>
-        <div class="limiter-bar-bg"><div class="limiter-bar-fill" style="width:90%; background:var(--red);"></div></div>
-        <div class="limiter-pct" style="color:var(--red)">P1</div>
-      </div>
-
-      <div class="limiter-row">
-        <div class="limiter-name">Running Volume</div>
-        <div class="limiter-bar-bg"><div class="limiter-bar-fill" style="width:80%; background:var(--accent);"></div></div>
-        <div class="limiter-pct" style="color:var(--accent)">P2</div>
-      </div>
-
-      <div class="limiter-row">
-        <div class="limiter-name">Running Economy</div>
-        <div class="limiter-bar-bg"><div class="limiter-bar-fill" style="width:75%; background:var(--accent2);"></div></div>
-        <div class="limiter-pct" style="color:var(--accent2)">P3</div>
-      </div>
-
-      <div class="limiter-row">
-        <div class="limiter-name">Calf/Soleus Capacity</div>
-        <div class="limiter-bar-bg"><div class="limiter-bar-fill" style="width:60%; background:var(--accent2);"></div></div>
-        <div class="limiter-pct" style="color:var(--accent2)">P4</div>
-      </div>
-
-      <div class="limiter-row">
-        <div class="limiter-name">Neuromuscular Speed</div>
-        <div class="limiter-bar-bg"><div class="limiter-bar-fill" style="width:45%; background:var(--blue);"></div></div>
-        <div class="limiter-pct" style="color:var(--blue)">P5</div>
-      </div>
-
-      <div class="limiter-row">
-        <div class="limiter-name">Time / Consistency</div>
-        <div class="limiter-bar-bg"><div class="limiter-bar-fill" style="width:35%; background:var(--purple);"></div></div>
-        <div class="limiter-pct" style="color:var(--purple)">P6</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Athlete Stats -->
-  <div class="card col-4">
-    <div class="card-label">Athlete Profile</div>
-    <div style="font-family:var(--mono); font-size:11px; line-height:2.2; color:var(--muted);">
-      <div>Age &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:var(--text)">44</span></div>
-      <div>Weight &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:var(--text)">68kg / 150lbs</span></div>
-      <div>Cycling FTP &nbsp; <span style="color:var(--text)">195W (Saris H3)</span></div>
-      <div>Stryd CP &nbsp;&nbsp;&nbsp;&nbsp; <span style="color:var(--text)">230W</span></div>
-      <div>Max HR &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:var(--text)">198bpm</span></div>
-      <div>Rest HR &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:var(--text)">56–59bpm (Oura)</span></div>
-      <div>HRV avg &nbsp;&nbsp;&nbsp;&nbsp; <span style="color:var(--text)">43ms</span></div>
-      <div>Strike &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:var(--text)">Midfoot</span></div>
-      <div>Coach &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:var(--text)">Hannah Nuttall</span></div>
-    </div>
-  </div>
-
-  <!-- Update instructions -->
-  <div class="card col-12">
-    <div class="card-label">How to Update This Dashboard</div>
-    <div class="update-note">
-      WEEKLY WORKFLOW — Run scripts → paste outputs → share TrainingPeaks screenshot → ask Claude to update this dashboard<br>
-      &nbsp;&nbsp;1. python fetch_strava.py &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; → paste Strava output<br>
-      &nbsp;&nbsp;2. python fetch_oura.py &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; → paste Oura output<br>
-      &nbsp;&nbsp;3. TrainingPeaks screenshot &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ drop image into chat<br>
-      &nbsp;&nbsp;4. "Update my dashboard" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; → Claude updates all panels<br>
-      <br>
-      DATA CAVEATS — Outdoor ride power = Strava estimate (invalid) &nbsp;·&nbsp; Treadmill: cadence/HR valid only (Lever 85%BW) &nbsp;·&nbsp; Stryd power valid outdoor runs only
-    </div>
-  </div>
-
-</div>
-
-<div class="footer">
-  MATT HARRIS &nbsp;·&nbsp; SUB-20 5K CAMPAIGN &nbsp;·&nbsp; DATA: STRAVA + OURA + TRAININGPEAKS &nbsp;·&nbsp; COACH: HANNAH NUTTALL &nbsp;·&nbsp; LAST UPDATED: 26 MAY 2026
-</div>
-
+fetch('oura_data.json',{cache:'no-store'})
+  .then(r=>{if(!r.ok)throw new Error('no file');return r.json();})
+  .then(render)
+  .catch(()=>{
+    document.getElementById('err').style.display='block';
+    document.getElementById('err').textContent='Live oura_data.json not found — showing embedded snapshot.';
+    render(FALLBACK);
+  });
+</script>
 </body>
 </html>
