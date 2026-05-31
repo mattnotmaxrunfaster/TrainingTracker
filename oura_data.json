@@ -210,12 +210,11 @@
     "nightshift_note": "On-call cycle every 6 weeks (Fri 01:30–Sun 01:30). Expect HRV dip + RHR rise 2–3 days post-shift — not overtraining."
   },
   "strava": {
-    "pulled": "2026-05-31 14:02",
-    "acute_7d_mins": 312,
-    "chronic_28d_weekly_mins": 286,
-    "acwr": 1.09,
+    "pulled": "2026-05-31 15:00",
+    "acute_7d_mins": 288,
+    "chronic_28d_weekly_mins": 198,
+    "acwr": 1.46,
     "sessions_7d": 5,
-    "avg_hr_7d": 138,
-    "note": "Duration + HR based. Treadmill lever sessions: pace/power/TSS invalid (85% BW). Outdoor rides: power estimated, unreliable. Load = duration, not TSS."
+    "note": "Duration-based load (moving time). Treadmill lever sessions: pace/power/TSS invalid (85% BW). Outdoor rides: power estimated, unreliable. HR not aggregated across mixed session types as it would mislead. ACWR sweet spot ~0.8-1.3 (Gabbett 2016) — discussion aid, not a verdict."
   }
 }
