@@ -58,3 +58,81 @@ To https://github.com/mattnotmaxrunfaster/TrainingTracker.git
    b991eae..1645807  main -> main
  SUCCESS: pushed at 19:41:33.30 
  
+ 
+============================================================ 
+ Run started: 31/05/2026 19:50:05.67 
+============================================================ 
+[Oura] Loaded credentials from G:\Oura-fetch\.env
+[Oura] Fetching 14 days (2026-05-17 → 2026-05-31)...
+
+--- LATEST ---
+  Date       : 2026-05-31
+  Readiness  : 86 (Optimal)
+  RHR / HRV  : 50bpm / 44ms   (14d avg 50.9 / 42.4)
+  Sleep      : 8h39m
+  Stress     : normal (15m stress / 15m restored)
+  Resilience : solid
+  Trend days : 14
+  Preserved  : strava=True
+
+[OK] Wrote oura_data.json. Run fetch_strava_load.py next, then commit + push.
+[Strava] Loaded credentials from G:\Strava-fetch\.env
+[Strava] Fetching activities since 2026-04-01...
+[Strava] Got 32 activities.
+
+--- COMPUTED LOAD (duration-based) ---
+  Acute 7d        : 293 min (4.9 h)
+  Chronic 28d/wk  : 211 min/wk (3.5 h/wk)
+  ACWR            : 1.39  (WATCH)
+  Sessions 7d     : 5
+  Fitness (CTL)   : 22.3
+  Fatigue (ATL)   : 35.4
+  Form (TSB)      : -13.1  (buried/building)
+
+[OK] Wrote strava block into oura_data.json.
+     Commit oura_data.json to the repo — dashboard updates within ~60s.
+[main 7a8978c] Automated weekly update 31/05/2026
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+To https://github.com/mattnotmaxrunfaster/TrainingTracker.git
+   f2f7f31..7a8978c  main -> main
+ SUCCESS: pushed at 19:50:09.43 
+ 
+ 
+============================================================ 
+ Run started: 31/05/2026 19:53:49.05 
+============================================================ 
+[Oura] Loaded credentials from G:\Oura-fetch\.env
+[Oura] Fetching 14 days (2026-05-17 → 2026-05-31)...
+
+--- LATEST ---
+  Date       : 2026-05-31
+  Readiness  : 86 (Optimal)
+  RHR / HRV  : 50bpm / 44ms   (14d avg 50.9 / 42.4)
+  Sleep      : 8h39m
+  Stress     : normal (15m stress / 15m restored)
+  Resilience : solid
+  Trend days : 14
+  Preserved  : strava=True
+
+[OK] Wrote oura_data.json. Run fetch_strava_load.py next, then commit + push.
+[Strava] Loaded credentials from G:\Strava-fetch\.env
+[Strava] Fetching activities since 2026-04-01...
+[Strava] Got 32 activities.
+
+--- COMPUTED LOAD (duration-based) ---
+  Acute 7d        : 293 min (4.9 h)
+  Chronic 28d/wk  : 211 min/wk (3.5 h/wk)
+  ACWR            : 1.39  (WATCH)
+  Sessions 7d     : 5
+  Fitness (CTL)   : 22.3
+  Fatigue (ATL)   : 35.4
+  Form (TSB)      : -13.1  (buried/building)
+
+[OK] Wrote strava block into oura_data.json.
+     Commit oura_data.json to the repo — dashboard updates within ~60s.
+[main ae68214] Automated weekly update 31/05/2026
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+To https://github.com/mattnotmaxrunfaster/TrainingTracker.git
+   7a8978c..ae68214  main -> main
+ SUCCESS: pushed at 19:53:52.66 
+ 
