@@ -253,3 +253,49 @@ To https://github.com/mattnotmaxrunfaster/TrainingTracker.git
    d27d6dd..b4d45ff  main -> main
  SUCCESS: pushed at 20:10:34.59 
  
+ 
+============================================================ 
+ Run started: 07/06/2026 12:00:01.51 
+============================================================ 
+[Oura] Loaded credentials from G:\Oura-fetch\.env
+[Oura] Fetching 14 days (2026-05-24 → 2026-06-07)...
+
+--- LATEST ---
+  Date       : 2026-06-07
+  Readiness  : 92 (Optimal)
+  RHR / HRV  : 50bpm / 51ms   (14d avg 50.2 / 46.8)
+  Sleep      : 8h30m
+  Stress     : — (0m stress / 15m restored)
+  Resilience : strong
+  Trend days : 13
+  Preserved  : strava=True
+
+[OK] Wrote oura_data.json. Run fetch_strava_load.py next, then commit + push.
+[Strava] Loaded credentials from G:\Strava-fetch\.env
+[Strava] Access token expired — refreshing...
+[ERROR] Token refresh failed (401): {"message":"Authorization Error","errors":[{"resource":"Application","field":"","code":"invalid"}]}
+ ERROR: Strava fetch failed at 12:00:05.96 
+ 
+ 
+============================================================ 
+ Run started: 07/06/2026 12:12:56.47 
+============================================================ 
+[Oura] Loaded credentials from G:\Oura-fetch\.env
+[Oura] Fetching 14 days (2026-05-24 → 2026-06-07)...
+
+--- LATEST ---
+  Date       : 2026-06-07
+  Readiness  : 92 (Optimal)
+  RHR / HRV  : 50bpm / 51ms   (14d avg 50.2 / 46.8)
+  Sleep      : 8h30m
+  Stress     : — (0m stress / 15m restored)
+  Resilience : strong
+  Trend days : 13
+  Preserved  : strava=True
+
+[OK] Wrote oura_data.json. Run fetch_strava_load.py next, then commit + push.
+[Strava] Loaded credentials from G:\Strava-fetch\.env
+[Strava] Access token expired — refreshing...
+[ERROR] Token refresh failed (401): {"message":"Authorization Error","errors":[{"resource":"Application","field":"","code":"invalid"}]}
+ ERROR: Strava fetch failed at 12:12:57.72 
+ 
