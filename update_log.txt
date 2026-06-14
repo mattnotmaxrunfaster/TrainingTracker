@@ -345,3 +345,26 @@ To https://github.com/mattnotmaxrunfaster/TrainingTracker.git
 [ERROR] Token refresh failed (401): {"message":"Authorization Error","errors":[{"resource":"Application","field":"","code":"invalid"}]}
  ERROR: Strava fetch failed at 13:39:47.31 
  
+ 
+============================================================ 
+ Run started: 14/06/2026 13:47:32.62 
+============================================================ 
+[Oura] Loaded credentials from G:\Oura-fetch\.env
+[Oura] Fetching 14 days (2026-05-31 → 2026-06-14)...
+
+--- LATEST ---
+  Date       : 2026-06-14
+  Readiness  : 83 (Good)
+  RHR / HRV  : 51bpm / 33ms   (14d avg 49.0 / 44.1)
+  Sleep      : 7h34m
+  Stress     : — (30m stress / 0m restored)
+  Resilience : exceptional
+  Trend days : 12
+  Preserved  : strava=True
+
+[OK] Wrote oura_data.json. Run fetch_strava_load.py next, then commit + push.
+[Strava] Loaded credentials from G:\Strava-fetch\.env
+[Strava] Access token expired — refreshing...
+[ERROR] Token refresh failed (401): {"message":"Authorization Error","errors":[{"resource":"Application","field":"","code":"invalid"}]}
+ ERROR: Strava fetch failed at 13:47:36.90 
+ 
