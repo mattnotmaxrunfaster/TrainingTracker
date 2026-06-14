@@ -1,126 +1,56 @@
 {
-  "pulled": "2026-06-07 12:12",
+  "pulled": "2026-06-14 13:39",
   "athlete": "Matt Harris",
   "baselines": {
     "rhr": 57,
     "rhr_range": "56-59",
     "hrv": 43,
     "temp_flag_threshold": 0.5,
-    "avg_rhr_14d": 50.2,
-    "avg_hrv_14d": 46.8
+    "avg_rhr_14d": 49.0,
+    "avg_hrv_14d": 44.1
   },
   "latest": {
-    "date": "2026-06-07",
-    "readiness": 92,
-    "readiness_label": "Optimal",
+    "date": "2026-06-14",
+    "readiness": 83,
+    "readiness_label": "Good",
     "contributors": {
-      "activity_balance": 73,
-      "body_temperature": 90,
-      "hrv_balance": 94,
-      "previous_day_activity": 100,
-      "previous_night": 100,
+      "activity_balance": 88,
+      "body_temperature": 100,
+      "hrv_balance": 88,
+      "previous_day_activity": 81,
+      "previous_night": 56,
       "recovery_index": 100,
-      "resting_heart_rate": 94,
-      "sleep_balance": 83,
-      "sleep_regularity": 89
+      "resting_heart_rate": 80,
+      "sleep_balance": 89,
+      "sleep_regularity": 87
     },
     "sleep": {
-      "total": "8h30m",
-      "total_minutes": 510,
-      "deep_minutes": 66,
-      "rem_minutes": 158,
-      "light_minutes": 286,
-      "awake_minutes": 72
+      "total": "7h34m",
+      "total_minutes": 454,
+      "deep_minutes": 68,
+      "rem_minutes": 128,
+      "light_minutes": 258,
+      "awake_minutes": 149
     },
-    "rhr": 50,
-    "hrv": 51,
-    "temp_dev": -0.8,
-    "resp_rate": 14.0,
+    "rhr": 51,
+    "hrv": 33,
+    "temp_dev": -0.3,
+    "resp_rate": 13.0,
     "stress": {
-      "stress_high_minutes": 0,
-      "recovery_high_minutes": 15,
+      "stress_high_minutes": 30,
+      "recovery_high_minutes": 0,
       "day_summary": "—"
     },
     "resilience": {
-      "level": "strong",
+      "level": "exceptional",
       "contributors": {
-        "sleep_recovery": 75.3,
-        "daytime_recovery": 66.4,
-        "stress": 40.3
+        "sleep_recovery": 77.4,
+        "daytime_recovery": 66.6,
+        "stress": 48.2
       }
     }
   },
   "trend": [
-    {
-      "date": "2026-05-25",
-      "readiness": 76,
-      "rhr": 50,
-      "hrv": 50,
-      "temp_dev": 0.2,
-      "stress_min": 30,
-      "resilience": "solid",
-      "flag": false
-    },
-    {
-      "date": "2026-05-26",
-      "readiness": 80,
-      "rhr": 50,
-      "hrv": 44,
-      "temp_dev": -0.1,
-      "stress_min": 30,
-      "resilience": "solid",
-      "flag": false
-    },
-    {
-      "date": "2026-05-27",
-      "readiness": 87,
-      "rhr": 46,
-      "hrv": 64,
-      "temp_dev": 0.1,
-      "stress_min": 60,
-      "resilience": "solid",
-      "flag": false
-    },
-    {
-      "date": "2026-05-28",
-      "readiness": 83,
-      "rhr": 51,
-      "hrv": 42,
-      "temp_dev": 0.3,
-      "stress_min": 120,
-      "resilience": "solid",
-      "flag": false
-    },
-    {
-      "date": "2026-05-29",
-      "readiness": 76,
-      "rhr": 55,
-      "hrv": 47,
-      "temp_dev": 0.2,
-      "stress_min": 15,
-      "resilience": "solid",
-      "flag": false
-    },
-    {
-      "date": "2026-05-30",
-      "readiness": 80,
-      "rhr": 52,
-      "hrv": 44,
-      "temp_dev": 0.3,
-      "stress_min": 0,
-      "resilience": "solid",
-      "flag": false
-    },
-    {
-      "date": "2026-05-31",
-      "readiness": 86,
-      "rhr": 50,
-      "hrv": 44,
-      "temp_dev": -0.1,
-      "stress_min": 15,
-      "resilience": "solid",
-      "flag": false
-    },
     {
       "date": "2026-06-01",
       "readiness": 87,
@@ -172,13 +102,73 @@
       "flag": true
     },
     {
-      "date": "2026-06-07",
-      "readiness": 92,
-      "rhr": 50,
-      "hrv": 51,
-      "temp_dev": -0.8,
-      "stress_min": 0,
+      "date": "2026-06-08",
+      "readiness": 83,
+      "rhr": 51,
+      "hrv": 39,
+      "temp_dev": 0.3,
+      "stress_min": 45,
       "resilience": "strong",
+      "flag": false
+    },
+    {
+      "date": "2026-06-09",
+      "readiness": 84,
+      "rhr": 48,
+      "hrv": 52,
+      "temp_dev": -0.4,
+      "stress_min": 165,
+      "resilience": "strong",
+      "flag": false
+    },
+    {
+      "date": "2026-06-10",
+      "readiness": 90,
+      "rhr": 48,
+      "hrv": 48,
+      "temp_dev": 0.2,
+      "stress_min": 45,
+      "resilience": "strong",
+      "flag": false
+    },
+    {
+      "date": "2026-06-11",
+      "readiness": 89,
+      "rhr": 48,
+      "hrv": 53,
+      "temp_dev": 0.4,
+      "stress_min": 180,
+      "resilience": "strong",
+      "flag": false
+    },
+    {
+      "date": "2026-06-12",
+      "readiness": 85,
+      "rhr": 48,
+      "hrv": 45,
+      "temp_dev": 0.0,
+      "stress_min": 150,
+      "resilience": "strong",
+      "flag": false
+    },
+    {
+      "date": "2026-06-13",
+      "readiness": 92,
+      "rhr": 46,
+      "hrv": 37,
+      "temp_dev": -0.1,
+      "stress_min": 105,
+      "resilience": "exceptional",
+      "flag": true
+    },
+    {
+      "date": "2026-06-14",
+      "readiness": 83,
+      "rhr": 51,
+      "hrv": 33,
+      "temp_dev": -0.3,
+      "stress_min": 30,
+      "resilience": "exceptional",
       "flag": true
     }
   ],
