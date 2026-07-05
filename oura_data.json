@@ -1,52 +1,52 @@
 {
-  "pulled": "2026-07-05 12:00",
+  "pulled": "2026-07-05 13:13",
   "athlete": "Matt Harris",
   "baselines": {
     "rhr": 57,
     "rhr_range": "56-59",
     "hrv": 43,
     "temp_flag_threshold": 0.5,
-    "avg_rhr_14d": 50.1,
-    "avg_hrv_14d": 42.3
+    "avg_rhr_14d": 50.2,
+    "avg_hrv_14d": 42.2
   },
   "latest": {
-    "date": "2026-07-04",
-    "readiness": 83,
+    "date": "2026-07-05",
+    "readiness": 79,
     "readiness_label": "Good",
     "contributors": {
-      "activity_balance": 89,
-      "body_temperature": 99,
+      "activity_balance": 77,
+      "body_temperature": 100,
       "hrv_balance": 85,
-      "previous_day_activity": 95,
-      "previous_night": 53,
-      "recovery_index": 53,
-      "resting_heart_rate": 100,
-      "sleep_balance": 100,
-      "sleep_regularity": 83
+      "previous_day_activity": 80,
+      "previous_night": 79,
+      "recovery_index": 65,
+      "resting_heart_rate": 66,
+      "sleep_balance": 97,
+      "sleep_regularity": 81
     },
     "sleep": {
-      "total": "9h52m",
-      "total_minutes": 592,
-      "deep_minutes": 36,
-      "rem_minutes": 146,
-      "light_minutes": 410,
-      "awake_minutes": 229
+      "total": "9h05m",
+      "total_minutes": 545,
+      "deep_minutes": 57,
+      "rem_minutes": 120,
+      "light_minutes": 368,
+      "awake_minutes": 137
     },
-    "rhr": 47,
-    "hrv": 45,
-    "temp_dev": 0.1,
-    "resp_rate": 13.375,
+    "rhr": 52,
+    "hrv": 42,
+    "temp_dev": 0.0,
+    "resp_rate": 13.875,
     "stress": {
-      "stress_high_minutes": 285,
-      "recovery_high_minutes": 75,
-      "day_summary": "stressful"
+      "stress_high_minutes": 0,
+      "recovery_high_minutes": 30,
+      "day_summary": "—"
     },
     "resilience": {
       "level": "solid",
       "contributors": {
-        "sleep_recovery": 62.1,
-        "daytime_recovery": 55.5,
-        "stress": 50.0
+        "sleep_recovery": 59.8,
+        "daytime_recovery": 53.4,
+        "stress": 51.8
       }
     }
   },
@@ -157,7 +157,17 @@
       "rhr": 47,
       "hrv": 45,
       "temp_dev": 0.1,
-      "stress_min": 285,
+      "stress_min": 255,
+      "resilience": "solid",
+      "flag": false
+    },
+    {
+      "date": "2026-07-05",
+      "readiness": 79,
+      "rhr": 52,
+      "hrv": 42,
+      "temp_dev": 0.0,
+      "stress_min": 0,
       "resilience": "solid",
       "flag": false
     }
@@ -312,7 +322,7 @@
         "form": -6.4
       }
     ],
-    "pulled": "2026-07-05 12:00",
+    "pulled": "2026-07-05 13:13",
     "note": "Duration-based load (moving time). Treadmill lever sessions: pace/power/TSS invalid (85% BW). Outdoor rides: power estimated, unreliable. HR not aggregated across mixed session types as it would mislead. ACWR sweet spot ~0.8-1.3 (Gabbett 2016) — discussion aid, not a verdict."
   }
 }
