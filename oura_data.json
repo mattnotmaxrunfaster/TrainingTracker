@@ -1,5 +1,5 @@
 {
-  "pulled": "2026-07-05 13:13",
+  "pulled": "2026-07-05 13:19",
   "athlete": "Matt Harris",
   "baselines": {
     "rhr": 57,
@@ -322,7 +322,7 @@
         "form": -6.4
       }
     ],
-    "pulled": "2026-07-05 13:13",
+    "pulled": "2026-07-05 13:19",
     "note": "Duration-based load (moving time). Treadmill lever sessions: pace/power/TSS invalid (85% BW). Outdoor rides: power estimated, unreliable. HR not aggregated across mixed session types as it would mislead. ACWR sweet spot ~0.8-1.3 (Gabbett 2016) — discussion aid, not a verdict."
   }
 }
