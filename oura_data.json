@@ -1,106 +1,56 @@
 {
-  "pulled": "2026-08-30 12:00",
+  "pulled": "2026-09-06 12:00",
   "athlete": "Matt Harris",
   "baselines": {
     "rhr": 57,
     "rhr_range": "56-59",
     "hrv": 43,
     "temp_flag_threshold": 0.5,
-    "avg_rhr_14d": 49.4,
-    "avg_hrv_14d": 42.5
+    "avg_rhr_14d": 53.4,
+    "avg_hrv_14d": 38.3
   },
   "latest": {
-    "date": "2026-08-29",
-    "readiness": 88,
-    "readiness_label": "Optimal",
+    "date": "2026-09-04",
+    "readiness": 84,
+    "readiness_label": "Good",
     "contributors": {
       "activity_balance": 97,
       "body_temperature": 100,
       "hrv_balance": 83,
-      "previous_day_activity": 89,
-      "previous_night": 80,
-      "recovery_index": 100,
-      "resting_heart_rate": 100,
-      "sleep_balance": 76,
-      "sleep_regularity": 85
+      "previous_day_activity": null,
+      "previous_night": 99,
+      "recovery_index": 66,
+      "resting_heart_rate": 81,
+      "sleep_balance": 75,
+      "sleep_regularity": 84
     },
     "sleep": {
-      "total": "8h26m",
-      "total_minutes": 506,
-      "deep_minutes": 90,
-      "rem_minutes": 116,
-      "light_minutes": 300,
-      "awake_minutes": 84
+      "total": "0h28m",
+      "total_minutes": 28,
+      "deep_minutes": 10,
+      "rem_minutes": 0,
+      "light_minutes": 18,
+      "awake_minutes": 10
     },
-    "rhr": 47,
-    "hrv": 50,
-    "temp_dev": 0.0,
-    "resp_rate": 13.375,
+    "rhr": 73,
+    "hrv": 31,
+    "temp_dev": 0.1,
+    "resp_rate": null,
     "stress": {
-      "stress_high_minutes": 0,
+      "stress_high_minutes": 45,
       "recovery_high_minutes": 0,
-      "day_summary": "—"
+      "day_summary": "normal"
     },
     "resilience": {
       "level": "strong",
       "contributors": {
-        "sleep_recovery": 72.3,
-        "daytime_recovery": 64.7,
-        "stress": 40.4
+        "sleep_recovery": 71.4,
+        "daytime_recovery": 65.5,
+        "stress": 34.4
       }
     }
   },
   "trend": [
-    {
-      "date": "2026-08-18",
-      "readiness": 80,
-      "rhr": 50,
-      "hrv": 41,
-      "temp_dev": 0.1,
-      "stress_min": 15,
-      "resilience": "solid",
-      "flag": false
-    },
-    {
-      "date": "2026-08-19",
-      "readiness": 83,
-      "rhr": 48,
-      "hrv": 44,
-      "temp_dev": -0.0,
-      "stress_min": 45,
-      "resilience": "solid",
-      "flag": false
-    },
-    {
-      "date": "2026-08-20",
-      "readiness": 84,
-      "rhr": 49,
-      "hrv": 45,
-      "temp_dev": -0.0,
-      "stress_min": 30,
-      "resilience": "strong",
-      "flag": false
-    },
-    {
-      "date": "2026-08-21",
-      "readiness": 89,
-      "rhr": 48,
-      "hrv": 49,
-      "temp_dev": -0.7,
-      "stress_min": 30,
-      "resilience": "strong",
-      "flag": true
-    },
-    {
-      "date": "2026-08-22",
-      "readiness": 84,
-      "rhr": 48,
-      "hrv": 40,
-      "temp_dev": -0.2,
-      "stress_min": 30,
-      "resilience": "strong",
-      "flag": false
-    },
     {
       "date": "2026-08-24",
       "readiness": 90,
@@ -144,165 +94,205 @@
     {
       "date": "2026-08-29",
       "readiness": 88,
-      "rhr": 47,
-      "hrv": 50,
+      "rhr": 61,
+      "hrv": 30,
       "temp_dev": 0.0,
-      "stress_min": 0,
+      "stress_min": 15,
+      "resilience": "strong",
+      "flag": true
+    },
+    {
+      "date": "2026-08-31",
+      "readiness": 91,
+      "rhr": 48,
+      "hrv": 38,
+      "temp_dev": 0.1,
+      "stress_min": 75,
+      "resilience": "strong",
+      "flag": true
+    },
+    {
+      "date": "2026-09-01",
+      "readiness": 86,
+      "rhr": 49,
+      "hrv": 43,
+      "temp_dev": 0.1,
+      "stress_min": 15,
       "resilience": "strong",
       "flag": false
+    },
+    {
+      "date": "2026-09-02",
+      "readiness": 83,
+      "rhr": 46,
+      "hrv": 47,
+      "temp_dev": 0.1,
+      "stress_min": 60,
+      "resilience": "strong",
+      "flag": false
+    },
+    {
+      "date": "2026-09-04",
+      "readiness": 84,
+      "rhr": 73,
+      "hrv": 31,
+      "temp_dev": 0.1,
+      "stress_min": 45,
+      "resilience": "strong",
+      "flag": true
     }
   ],
   "strava": {
-    "acute_7d_mins": 116,
-    "chronic_28d_weekly_mins": 184,
-    "acwr": 0.63,
-    "sessions_7d": 2,
-    "fitness_ctl": 17.6,
-    "fatigue_atl": 14.2,
-    "form_tsb": 3.4,
+    "acute_7d_mins": 0,
+    "chronic_28d_weekly_mins": 141,
+    "acwr": 0.0,
+    "sessions_7d": 0,
+    "fitness_ctl": 13.6,
+    "fatigue_atl": 5.2,
+    "form_tsb": 8.4,
     "ff_series": [
       {
-        "date": "2026-08-03",
-        "fitness": 12.2,
-        "form": -2.8
-      },
-      {
-        "date": "2026-08-04",
-        "fitness": 11.9,
-        "form": -1.1
-      },
-      {
-        "date": "2026-08-05",
-        "fitness": 12.3,
-        "form": -2.9
-      },
-      {
-        "date": "2026-08-06",
-        "fitness": 13.2,
-        "form": -6.7
-      },
-      {
-        "date": "2026-08-07",
-        "fitness": 12.9,
-        "form": -4.4
-      },
-      {
-        "date": "2026-08-08",
-        "fitness": 13.7,
-        "form": -7.5
-      },
-      {
-        "date": "2026-08-09",
-        "fitness": 15.5,
-        "form": -15.0
-      },
-      {
         "date": "2026-08-10",
-        "fitness": 16.6,
-        "form": -17.9
+        "fitness": 14.1,
+        "form": -20.2
       },
       {
         "date": "2026-08-11",
-        "fitness": 16.2,
-        "form": -13.7
+        "fitness": 13.8,
+        "form": -15.9
       },
       {
         "date": "2026-08-12",
-        "fitness": 16.6,
-        "form": -13.8
+        "fitness": 14.3,
+        "form": -16.0
       },
       {
         "date": "2026-08-13",
-        "fitness": 16.2,
-        "form": -10.1
+        "fitness": 13.9,
+        "form": -12.3
       },
       {
         "date": "2026-08-14",
-        "fitness": 17.2,
-        "form": -13.5
+        "fitness": 15.0,
+        "form": -15.6
       },
       {
         "date": "2026-08-15",
-        "fitness": 17.6,
-        "form": -13.7
+        "fitness": 15.5,
+        "form": -15.8
       },
       {
         "date": "2026-08-16",
-        "fitness": 19.4,
-        "form": -20.1
+        "fitness": 17.3,
+        "form": -22.1
       },
       {
         "date": "2026-08-17",
-        "fitness": 20.3,
-        "form": -21.7
+        "fitness": 18.3,
+        "form": -23.7
       },
       {
         "date": "2026-08-18",
-        "fitness": 19.8,
-        "form": -16.6
+        "fitness": 17.8,
+        "form": -18.5
       },
       {
         "date": "2026-08-19",
-        "fitness": 19.8,
-        "form": -14.2
+        "fitness": 17.8,
+        "form": -16.1
       },
       {
         "date": "2026-08-20",
-        "fitness": 19.3,
-        "form": -10.1
+        "fitness": 17.4,
+        "form": -12.0
       },
       {
         "date": "2026-08-21",
-        "fitness": 18.9,
-        "form": -6.6
+        "fitness": 17.0,
+        "form": -8.5
       },
       {
         "date": "2026-08-22",
-        "fitness": 18.4,
-        "form": -3.7
+        "fitness": 16.6,
+        "form": -5.5
       },
       {
         "date": "2026-08-23",
-        "fitness": 19.4,
-        "form": -7.8
+        "fitness": 17.6,
+        "form": -9.5
       },
       {
         "date": "2026-08-24",
-        "fitness": 19.0,
-        "form": -4.6
+        "fitness": 17.2,
+        "form": -6.3
       },
       {
         "date": "2026-08-25",
-        "fitness": 18.5,
-        "form": -1.9
+        "fitness": 16.8,
+        "form": -3.6
       },
       {
         "date": "2026-08-26",
-        "fitness": 19.4,
-        "form": -5.8
+        "fitness": 17.7,
+        "form": -7.4
       },
       {
         "date": "2026-08-27",
-        "fitness": 18.9,
-        "form": -2.9
+        "fitness": 17.3,
+        "form": -4.5
       },
       {
         "date": "2026-08-28",
-        "fitness": 18.5,
-        "form": -0.4
+        "fitness": 16.9,
+        "form": -2.0
       },
       {
         "date": "2026-08-29",
-        "fitness": 18.1,
-        "form": 1.7
+        "fitness": 16.5,
+        "form": 0.1
       },
       {
         "date": "2026-08-30",
-        "fitness": 17.6,
+        "fitness": 16.1,
+        "form": 1.9
+      },
+      {
+        "date": "2026-08-31",
+        "fitness": 15.7,
         "form": 3.4
+      },
+      {
+        "date": "2026-09-01",
+        "fitness": 15.4,
+        "form": 4.7
+      },
+      {
+        "date": "2026-09-02",
+        "fitness": 15.0,
+        "form": 5.8
+      },
+      {
+        "date": "2026-09-03",
+        "fitness": 14.7,
+        "form": 6.6
+      },
+      {
+        "date": "2026-09-04",
+        "fitness": 14.3,
+        "form": 7.4
+      },
+      {
+        "date": "2026-09-05",
+        "fitness": 14.0,
+        "form": 7.9
+      },
+      {
+        "date": "2026-09-06",
+        "fitness": 13.6,
+        "form": 8.4
       }
     ],
-    "pulled": "2026-08-30 12:00",
+    "pulled": "2026-09-06 12:00",
     "note": "Duration-based load (moving time). Treadmill lever sessions: pace/power/TSS invalid (85% BW). Outdoor rides: power estimated, unreliable. HR not aggregated across mixed session types as it would mislead. ACWR sweet spot ~0.8-1.3 (Gabbett 2016) — discussion aid, not a verdict."
   }
 }
